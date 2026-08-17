@@ -6,6 +6,9 @@ import {
   Layers, Sliders, Activity, Search, Clock, Compass, Megaphone
 } from 'lucide-react';
 import { type PageId } from '../components/Navigation';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Card } from '@/components/ui/card';
 
 interface ServicesProps {
   setActivePage?: (page: PageId) => void;
@@ -98,167 +101,163 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
       icon: LineChart
     },
     {
-      id: 'revenue-management-optimization',
+      id: 'repositioning-turnaround',
       num: '06',
-      category: 'Revenue',
-      categoryLabel: 'Revenue & Yield',
-      title: 'Revenue Management & Optimization',
-      desc: 'Maximizing revenue through demand forecasting, rate strategies, and inventory.',
+      category: 'Strategy',
+      categoryLabel: 'Strategy & Turnaround',
+      title: 'Hotel Repositioning & Turnaround',
+      desc: 'Transforming underperforming hotels through strategic and operational improvements.',
       icon: TrendingUp
     },
     {
-      id: 'qa-readiness',
+      id: 'brand-conversion',
       num: '07',
-      category: 'Operations',
-      categoryLabel: 'Operations & QA',
-      title: 'Quality Assurance (QA) Readiness',
-      desc: 'Ensuring brand compliance, operational excellence, and inspection readiness.',
+      category: 'Asset',
+      categoryLabel: 'Asset & Brand',
+      title: 'Brand Conversion & PIP Management',
+      desc: 'Managing property conversions, PIP compliance, and brand alignment.',
       icon: ShieldCheck
     },
     {
-      id: 'ffe-procurement',
+      id: 'extended-stay',
       num: '08',
-      category: 'Asset',
-      categoryLabel: 'Asset Planning',
-      title: 'FF&E Procurement & Asset Planning',
-      desc: 'Managing FF&E selection, purchasing, budgeting, and installations.',
-      icon: Layers
-    },
-    {
-      id: 'brand-selection-planning',
-      num: '09',
-      category: 'Asset',
-      categoryLabel: 'Brand Advisory',
-      title: 'Brand Selection, Planning & Review',
-      desc: 'Evaluating brands and aligning hotel concepts with market and ownership goals.',
-      icon: Compass
-    },
-    {
-      id: 'pre-opening-services',
-      num: '10',
       category: 'Operations',
-      categoryLabel: 'Operations & Launch',
-      title: 'Hotel Pre-Opening Services',
-      desc: 'Managing pre-opening activities for smooth, successful hotel launches.',
+      categoryLabel: 'Operations Model',
+      title: 'Extended-Stay Management Expertise',
+      desc: 'Specialized management solutions tailored for extended-stay properties.',
       icon: KeyRound
     },
     {
-      id: 'project-management',
-      num: '11',
-      category: 'Asset',
-      categoryLabel: 'Project Management',
-      title: 'Hospitality Project Management',
-      desc: 'Leading projects for renovations, transitions, and operational improvements.',
-      icon: Clock
-    },
-    {
-      id: 'daily-rate-strategy',
-      num: '12',
-      category: 'Revenue',
-      categoryLabel: 'Rate Strategy',
-      title: 'Daily Rate Strategy & Yield Management',
-      desc: 'Implementing dynamic pricing based on demand, trends, and market conditions.',
-      icon: BarChart3
-    },
-    {
-      id: 'price-optimization',
-      num: '13',
-      category: 'Revenue',
-      categoryLabel: 'Pricing Analytics',
-      title: 'Price Optimization',
-      desc: 'Using market insights and data to maximize ADR, RevPAR, and overall performance.',
-      icon: Sliders
-    },
-    {
-      id: 'daily-sales-monitoring',
-      num: '14',
-      category: 'Revenue',
-      categoryLabel: 'Sales Performance',
-      title: 'Daily Sales Performance Monitoring',
-      desc: 'Tracking sales, pace, goals, and revenue opportunities for continuous growth.',
-      icon: Activity
-    },
-    {
-      id: 'sales-marketing-strategy',
-      num: '15',
-      category: 'Strategy',
-      categoryLabel: 'Sales & Marketing',
-      title: 'Sales & Marketing Strategy',
-      desc: 'Building strategies to grow corporate, group, leisure, and local market segments.',
-      icon: Megaphone
-    },
-    {
-      id: 'task-force-management',
-      num: '16',
+      id: 'guest-experience',
+      num: '09',
       category: 'Operations',
-      categoryLabel: 'Task Force',
-      title: 'Task Force Management',
-      desc: 'Providing leadership and turnaround solutions during transitions and performance improvements.',
+      categoryLabel: 'Guest Quality',
+      title: 'Guest Experience & QA Management',
+      desc: 'Maintaining high service standards and ensuring brand QA compliance.',
       icon: UserCheck
     },
     {
-      id: 'competitive-benchmarking',
-      num: '17',
+      id: 'vendor-contract',
+      num: '10',
+      category: 'Operations',
+      categoryLabel: 'Cost Control',
+      title: 'Vendor Contract Negotiation & Cost Optimization',
+      desc: 'Leveraging scale and partnerships to lower operational and supplier costs.',
+      icon: Sliders
+    },
+    {
+      id: 'sales-marketing',
+      num: '11',
+      category: 'Revenue',
+      categoryLabel: 'Revenue & Sales',
+      title: 'Sales & Marketing Strategies',
+      desc: 'Targeted marketing campaigns and sales strategies to boost bookings.',
+      icon: Megaphone
+    },
+    {
+      id: 'revenue-pricing',
+      num: '12',
+      category: 'Revenue',
+      categoryLabel: 'Yield Mastery',
+      title: 'Revenue Management & Pricing Optimization',
+      desc: 'Dynamic pricing strategies and data analysis to maximize ADR and RevPAR.',
+      icon: BarChart3
+    },
+    {
+      id: 'pre-opening',
+      num: '13',
+      category: 'Asset',
+      categoryLabel: 'Launch Strategy',
+      title: 'Pre-Opening Planning & Turnkey Launch',
+      desc: 'Guiding new hotel openings from planning to full operational launch.',
+      icon: Compass
+    },
+    {
+      id: 'tech-automation',
+      num: '14',
+      category: 'Operations',
+      categoryLabel: 'Systems & Tech',
+      title: 'Technology & Automation Integration',
+      desc: 'Implementing modern PMS, POS, and digital solutions for hotel operations.',
+      icon: Activity
+    },
+    {
+      id: 'risk-audit',
+      num: '15',
       category: 'Strategy',
-      categoryLabel: 'Market Intelligence',
-      title: 'Competitive Benchmarking & Market Analysis',
-      desc: 'Analyzing competitors, market trends, and opportunities to drive revenue growth.',
+      categoryLabel: 'Risk & Audit',
+      title: 'Operational Audits & Risk Mitigation',
+      desc: 'Conducting in-depth property reviews to ensure safety and financial health.',
       icon: Search
+    },
+    {
+      id: 'sustainability',
+      num: '16',
+      category: 'Asset',
+      categoryLabel: 'ESG & Efficiency',
+      title: 'Sustainability & Energy Efficiency Programs',
+      desc: 'Implementing eco-friendly practices that lower utility and operational overhead.',
+      icon: Clock
+    },
+    {
+      id: 'recruitment',
+      num: '17',
+      category: 'Operations',
+      categoryLabel: 'Talent Acquisition',
+      title: 'Executive Recruitment & Staffing Support',
+      desc: 'Sourcing and recruiting top-tier hospitality managers and key personnel.',
+      icon: Layers
     }
   ];
 
-  const filteredAlacarte = alacarteServices;
-
+  const [activeCategory] = useState<string>('all');
   const [isAutoPlayPaused, setIsAutoPlayPaused] = useState(false);
 
-  const scrollAlacarte = (direction: 'left' | 'right') => {
-    if (alacarteCarouselRef.current) {
-      const cardWidth = 240;
-      const { scrollLeft, scrollWidth, clientWidth } = alacarteCarouselRef.current;
-      
-      if (direction === 'right') {
-        if (scrollLeft + clientWidth >= scrollWidth - 20) {
-          alacarteCarouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          alacarteCarouselRef.current.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        }
-      } else {
-        if (scrollLeft <= 20) {
-          alacarteCarouselRef.current.scrollTo({ left: scrollWidth, behavior: 'smooth' });
-        } else {
-          alacarteCarouselRef.current.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        }
-      }
-    }
-  };
+  const filteredAlacarte = activeCategory === 'all'
+    ? alacarteServices
+    : alacarteServices.filter(s => s.category === activeCategory);
 
-  // Automatic Carousel Interval (Loops smoothly and pauses on hover)
+  // Auto-scroll single-line carousel continuously every 4.5 seconds
   useEffect(() => {
     if (isAutoPlayPaused) return;
 
     const interval = setInterval(() => {
-      scrollAlacarte('right');
-    }, 3200);
+      if (alacarteCarouselRef.current) {
+        const { scrollLeft, scrollWidth, clientWidth } = alacarteCarouselRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+        
+        if (scrollLeft >= maxScroll - 10) {
+          alacarteCarouselRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          alacarteCarouselRef.current.scrollBy({ left: 240, behavior: 'smooth' });
+        }
+      }
+    }, 4500);
 
     return () => clearInterval(interval);
   }, [isAutoPlayPaused]);
 
+  const scrollAlacarte = (direction: 'left' | 'right') => {
+    if (alacarteCarouselRef.current) {
+      const scrollAmount = direction === 'left' ? -260 : 260;
+      alacarteCarouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="w-full py-28 bg-navy-dark min-h-screen px-4 sm:px-6 lg:px-8 text-left relative overflow-hidden">
-      {/* Background Ambient Glows */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gold-medium/5 rounded-full blur-3xl pointer-events-none" />
+    <div className="w-full py-28 bg-navy-dark min-h-screen px-4 sm:px-6 lg:px-8 relative overflow-hidden text-left">
+      {/* Background Ambience */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gold-medium/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-[800px] right-0 w-[500px] h-[500px] bg-gold-dark/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10 space-y-24">
         
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-medium/10 border border-gold-medium/25 mb-4">
+        <div className="text-center max-w-3xl mx-auto space-y-3">
+          <Badge variant="gold">
             <Sparkles className="w-3.5 h-3.5 text-gold-bright" />
-            <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-gold-bright uppercase">
-              Full-Spectrum Hospitality Solutions
-            </span>
-          </div>
+            <span>Full-Spectrum Hospitality Solutions</span>
+          </Badge>
           
           <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-wide leading-tight">
             Our Hospitality Services
@@ -276,28 +275,26 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
 
           {/* Quick Jump Badges */}
           <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
-            <a
-              href="#hotel-management"
-              className="px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-navy-medium border border-gold-medium/20 text-gold-medium hover:border-gold-medium/50 hover:text-white transition-all shadow-md"
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
             >
-              Hotel Management Services
-            </a>
-            <a
-              href="#alacarte-services"
-              className="px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase bg-navy-medium border border-gold-medium/20 text-gold-medium hover:border-gold-medium/50 hover:text-white transition-all shadow-md"
+              <a href="#hotel-management">Hotel Management Services</a>
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
             >
-              À la Carte Services (17)
-            </a>
+              <a href="#alacarte-services">À la Carte Services (17)</a>
+            </Button>
           </div>
         </div>
 
         {/* FLAGSHIP HERO SPOTLIGHT: Hotel Management Services */}
         <section id="hotel-management" className="scroll-mt-32">
-          <div className="relative rounded-2xl bg-gradient-to-br from-navy-medium via-navy-dark to-navy-medium border border-gold-medium/30 p-8 sm:p-12 lg:p-14 shadow-2xl overflow-hidden">
-            {/* Ambient Lighting */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gold-medium/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-gold-dark/10 rounded-full blur-3xl pointer-events-none" />
-
+          <Card className="p-8 sm:p-12 lg:p-14 shadow-2xl overflow-hidden border-gold-medium/30 bg-gradient-to-br from-navy-medium via-navy-dark to-navy-medium">
             <div className="relative z-10 grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
               
               {/* Left Column: Description, Pillars & Checklist */}
@@ -329,12 +326,13 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
                   </span>
                   <div className="flex flex-wrap gap-2">
                     {departmentPillars.map((dept, dIdx) => (
-                      <span
+                      <Badge
                         key={dIdx}
-                        className="px-3.5 py-1.5 rounded-lg bg-navy-dark/90 border border-gold-medium/20 text-xs text-gray-200 font-medium tracking-wide shadow-sm"
+                        variant="gold-subtle"
+                        className="py-1 px-3"
                       >
                         {dept}
-                      </span>
+                      </Badge>
                     ))}
                   </div>
                 </div>
@@ -363,13 +361,14 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
 
                 {/* Consultation CTA */}
                 <div className="pt-4 flex flex-wrap items-center gap-4">
-                  <button
+                  <Button
+                    variant="gold"
+                    size="lg"
                     onClick={handleNavContact}
-                    className="inline-flex items-center gap-2.5 px-8 py-3.5 bg-gradient-to-r from-gold-medium via-gold-bright to-gold-medium hover:from-gold-bright hover:to-gold-medium text-navy-dark font-bold tracking-widest text-xs uppercase rounded shadow-xl hover:shadow-gold-medium/30 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                   >
                     <span>Request Management Proposal</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Button>
                 </div>
               </div>
 
@@ -405,21 +404,17 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
               </div>
 
             </div>
-          </div>
+          </Card>
         </section>
 
         {/* COMPREHENSIVE HOSPITALITY MANAGEMENT SOLUTIONS (SINGLE LINE CAROUSEL) */}
         <section id="alacarte-services" className="scroll-mt-28 space-y-10">
           
-          {/* Section Header (Matching Screenshot) */}
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <span className="h-[1px] w-10 bg-gold-medium/60" />
-              <span className="text-[11px] font-semibold tracking-[0.25em] text-gold-bright uppercase">
-                OUR SERVICES
-              </span>
-              <span className="h-[1px] w-10 bg-gold-medium/60" />
-            </div>
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <Badge variant="gold">
+              OUR SERVICES
+            </Badge>
             
             <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-wide leading-tight">
               Comprehensive Hospitality Management Solutions
@@ -436,25 +431,29 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
             onMouseEnter={() => setIsAutoPlayPaused(true)}
             onMouseLeave={() => setIsAutoPlayPaused(false)}
           >
-            {/* Left Indicator Arrow (Centered on Left Side) */}
-            <button
+            {/* Left Indicator Arrow */}
+            <Button
+              variant="outline"
+              size="icon"
               onClick={() => scrollAlacarte('left')}
               aria-label="Previous Slide"
-              className="absolute -left-2 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-gold-medium/30 bg-navy-dark/95 backdrop-blur-md text-gold-bright hover:bg-gold-medium hover:text-navy-dark hover:border-gold-medium transition-all duration-300 flex items-center justify-center shadow-xl cursor-pointer hover:scale-105"
+              className="absolute -left-2 sm:-left-5 top-1/2 -translate-y-1/2 z-20 rounded-full border-gold-medium/30 bg-navy-dark/95 backdrop-blur-md text-gold-bright hover:bg-gold-medium hover:text-navy-dark shadow-xl"
             >
               <ChevronLeft className="w-5 h-5" />
-            </button>
+            </Button>
 
-            {/* Right Indicator Arrow (Centered on Right Side) */}
-            <button
+            {/* Right Indicator Arrow */}
+            <Button
+              variant="outline"
+              size="icon"
               onClick={() => scrollAlacarte('right')}
               aria-label="Next Slide"
-              className="absolute -right-2 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-gold-medium/30 bg-navy-dark/95 backdrop-blur-md text-gold-bright hover:bg-gold-medium hover:text-navy-dark hover:border-gold-medium transition-all duration-300 flex items-center justify-center shadow-xl cursor-pointer hover:scale-105"
+              className="absolute -right-2 sm:-right-5 top-1/2 -translate-y-1/2 z-20 rounded-full border-gold-medium/30 bg-navy-dark/95 backdrop-blur-md text-gold-bright hover:bg-gold-medium hover:text-navy-dark shadow-xl"
             >
               <ChevronRight className="w-5 h-5" />
-            </button>
+            </Button>
 
-            {/* Single Line Carousel Track with Centered Icon Cards */}
+            {/* Single Line Carousel Track */}
             <div
               ref={alacarteCarouselRef}
               className="flex gap-4 sm:gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 pt-2 no-scrollbar"
@@ -463,13 +462,10 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
               {filteredAlacarte.map((ala) => {
                 const Icon = ala.icon;
                 return (
-                  <div
+                  <Card
                     key={ala.id}
-                    className="w-[195px] sm:w-[215px] flex-shrink-0 snap-start bg-navy-medium/85 backdrop-blur-md border border-gold-medium/20 hover:border-gold-medium/60 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gold-medium/10 flex flex-col items-center text-center justify-center h-[190px] sm:h-[200px] relative overflow-hidden group"
+                    className="w-[195px] sm:w-[215px] flex-shrink-0 snap-start bg-navy-medium/85 backdrop-blur-md border-gold-medium/20 hover:border-gold-medium/60 rounded-xl p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-gold-medium/10 flex flex-col items-center text-center justify-center h-[190px] sm:h-[200px] relative overflow-hidden group"
                   >
-                    {/* Corner Ambient Glow */}
-                    <div className="absolute top-0 right-0 w-14 h-14 bg-gold-medium/5 rounded-full blur-md group-hover:bg-gold-medium/15 transition-all pointer-events-none" />
-
                     {/* Increased Circular Icon Badge */}
                     <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-2xl bg-gold-medium/15 border-2 border-gold-medium/40 flex items-center justify-center mx-auto mb-2.5 text-gold-bright shadow-inner group-hover:bg-gold-medium group-hover:text-navy-dark group-hover:scale-110 transition-all duration-300">
                       <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-gold-bright group-hover:text-navy-dark transition-colors" />
@@ -484,7 +480,7 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
                     <p className="text-gray-300 text-[10px] font-light leading-snug line-clamp-2 px-1">
                       {ala.desc}
                     </p>
-                  </div>
+                  </Card>
                 );
               })}
             </div>
@@ -493,16 +489,12 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
         </section>
 
         {/* Bottom Call to Action Section */}
-        <section className="relative rounded-2xl bg-gradient-to-r from-navy-medium via-navy-dark to-navy-medium border border-gold-medium/30 p-8 sm:p-12 text-center shadow-2xl overflow-hidden">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-gold-medium/10 rounded-full blur-3xl pointer-events-none" />
-          
+        <Card className="relative rounded-2xl bg-gradient-to-r from-navy-medium via-navy-dark to-navy-medium border-gold-medium/30 p-8 sm:p-12 text-center shadow-2xl overflow-hidden">
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-medium/10 border border-gold-medium/25">
+            <Badge variant="gold">
               <Sparkles className="w-3.5 h-3.5 text-gold-bright" />
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-gold-bright uppercase">
-                Custom Scope & Contracts
-              </span>
-            </div>
+              <span>Custom Scope & Contracts</span>
+            </Badge>
 
             <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl font-light text-white tracking-wide leading-tight">
               Tailored Hospitality Solutions for Your Portfolio
@@ -513,15 +505,16 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
             </p>
 
             <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
-              <button
+              <Button
+                variant="gold"
+                size="lg"
                 onClick={handleNavContact}
-                className="px-8 py-3.5 bg-gradient-to-r from-gold-medium via-gold-bright to-gold-medium hover:from-gold-bright hover:to-gold-medium text-navy-dark font-bold tracking-widest text-xs uppercase rounded shadow-xl hover:shadow-gold-medium/30 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
               >
                 Schedule Private Consultation
-              </button>
+              </Button>
             </div>
           </div>
-        </section>
+        </Card>
 
       </div>
     </div>

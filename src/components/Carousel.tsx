@@ -97,15 +97,18 @@ export const Carousel: React.FC<CarouselHeroProps> = () => {
         </div>
       ))}
 
-      {/* Main Hero Content Container with Framer Motion Stagger */}
-      <div className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center mt-12 sm:mt-16">
+      {/* Main Hero Content Container */}
+      <div 
+        className="relative z-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center justify-center mt-12 sm:mt-16"
+      >
         
         {/* Eyebrow Badge */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: -20, rotateX: 20 }}
+          animate={{ opacity: 1, y: 0, rotateX: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-medium/80 border border-gold-medium/30 backdrop-blur-md mb-6 shadow-lg"
+          whileHover={{ scale: 1.05, z: 20 }}
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-navy-medium/80 border border-gold-medium/30 backdrop-blur-md mb-6 shadow-lg cursor-pointer"
         >
           <motion.div
             animate={{ rotate: [0, 15, -15, 0] }}

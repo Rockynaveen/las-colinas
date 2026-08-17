@@ -2,28 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, useMotionValueEvent, AnimatePresence, type Variants } from 'framer-motion';
 import { Carousel } from '../components/Carousel';
 import { 
-  Shield, TrendingUp, Building, Building2, Award, ArrowRight, 
+  Shield, TrendingUp, Building2, Award, ArrowRight, 
   ChevronRight, ChevronLeft, Sparkles, Check, DollarSign, ShieldCheck, LineChart, 
   Wrench, Globe, Users, Layers, Compass, KeyRound, Clock, BarChart3, 
   Sliders, Activity, Megaphone, UserCheck, Search, Target, Handshake, Eye, Star,
   Lightbulb, Leaf, MapPin, Phone, Mail
 } from 'lucide-react';
 import { type PageId } from '../components/Navigation';
-
-interface LifecycleTab {
-  id: string;
-  number: string;
-  title: string;
-  subtitle: string;
-  icon: any;
-  headline: string;
-  tagline: string;
-  description: string;
-  stats: { value: string; label: string }[];
-  features: string[];
-  image: string;
-  quote: string;
-}
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 
 interface AlacarteService {
   id: string;
@@ -34,97 +23,6 @@ interface AlacarteService {
   desc: string;
   icon: any;
 }
-
-const lifecycleTabs: LifecycleTab[] = [
-  {
-    id: 'hotel-development',
-    number: '01',
-    title: 'Hotel Development',
-    subtitle: 'Feasibility, Brand PIPs & Turnkey Launch',
-    icon: Building,
-    headline: 'End-to-End Development & Strategic Project Launch',
-    tagline: 'Turnkey Launch Oversight',
-    description: 'We guide hospitality projects through the entire development lifecycle—from site selection, financial feasibility studies, and brand franchise selection, through architectural planning, brand PIP execution, and pre-opening operational integration.',
-    stats: [
-      { value: 'Turnkey', label: 'Feasibility to Opening' },
-      { value: '100%', label: 'Brand PIP Compliance' }
-    ],
-    features: [
-      'Comprehensive site selection, zoning review, and market feasibility analysis',
-      'Architectural planning, interior design, and brand PIP project management',
-      'Construction budgeting, FF&E procurement, and contractor oversight',
-      'Pre-opening sales, marketing campaigns, and staffing operational rollout'
-    ],
-    image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?q=80&w=1000&auto=format&fit=crop',
-    quote: 'Transforming blueprints and hospitality concepts into high-performing physical assets.'
-  },
-  {
-    id: 'asset-management',
-    number: '02',
-    title: 'Asset Management',
-    subtitle: 'Owner Representation & ROI Maximization',
-    icon: Shield,
-    headline: 'Strategic Owner Representation & Investment Protection',
-    tagline: 'Capital Preservation',
-    description: 'We act as dedicated owner representatives, overseeing capital expenditure allocation, debt structuring, property tax assessments, and long-term valuation modeling to safeguard capital and optimize returns.',
-    stats: [
-      { value: '100%', label: 'Fiduciary Alignment' },
-      { value: 'CapEx', label: 'Disciplined ROI Analysis' }
-    ],
-    features: [
-      'Active owner representation with detailed monthly asset oversight',
-      'Comprehensive capital expenditure (CapEx) ROI modeling & prioritization',
-      'Long-term property valuation, refinancing support, and exit modeling',
-      'Preventive physical plant maintenance and insurance risk management'
-    ],
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1000&auto=format&fit=crop',
-    quote: 'Safeguarding equity and maximizing asset appreciation through rigorous stewardship.'
-  },
-  {
-    id: 'operational-excellence',
-    number: '03',
-    title: 'Operational Excellence',
-    subtitle: 'Daily Leadership, Staffing & Brand QA',
-    icon: Award,
-    headline: 'Disciplined Day-to-Day Operations & Service Culture',
-    tagline: 'Flawless Daily Execution',
-    description: 'We drive daily hotel performance through standardized SOPs across front office, housekeeping, engineering, and food & beverage. Our hands-on leadership ensures superior guest satisfaction scores and flawless brand audit ratings.',
-    stats: [
-      { value: 'Top 5%', label: 'Brand QA Audit Ratings' },
-      { value: '4.5+ ★', label: 'Target Guest Score' }
-    ],
-    features: [
-      'Rigorous compliance with global franchise brand standards (IHG, Choice, Wyndham, boutique)',
-      'Leadership recruitment, continuous team training, and high-retention culture',
-      'Daily quality assurance audits and rapid guest issue resolution protocols',
-      'Energy management, workplace safety, and operational cost controls'
-    ],
-    image: 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?q=80&w=1000&auto=format&fit=crop',
-    quote: 'Exceptional service delivery that transforms first-time visitors into repeat loyal guests.'
-  },
-  {
-    id: 'revenue-optimization',
-    number: '04',
-    title: 'Revenue Optimization',
-    subtitle: 'Dynamic Pricing, OTA & Group Sales',
-    icon: TrendingUp,
-    headline: 'Dynamic Revenue Strategy & Market Share Outperformance',
-    tagline: 'RevPAR Outperformance',
-    description: 'Our proprietary revenue management methodologies leverage dynamic pricing algorithms, market compression tracking, and direct sales outreach to outpace the competitive set and maximize RevPAR across all market cycles.',
-    stats: [
-      { value: 'Top 10%', label: 'Comp-Set RevPAR Index' },
-      { value: '24/7', label: 'Dynamic Yield Management' }
-    ],
-    features: [
-      'Real-time algorithmic demand forecasting and dynamic rate flexing',
-      'Direct-booking website conversion strategies to reduce OTA commissions',
-      'Proactive corporate, group, government, and extended-stay sales outreach',
-      'Multi-channel GDS, OTA, and wholesale yield optimization'
-    ],
-    image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=1000&auto=format&fit=crop',
-    quote: 'Capturing high-yield demand and driving sustainable top-line market outperformance.'
-  }
-];
 
 const alacarteServices: AlacarteService[] = [
   {
@@ -387,10 +285,10 @@ const StatCounter: React.FC<StatCounterProps> = ({
       </div>
 
       {/* Big Gleaming Number */}
-      <div className="my-1.5">
-        <div className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-transparent bg-clip-text bg-gradient-to-r from-white via-gold-bright to-gold-medium tracking-tight">
+      <div className="my-1.5 flex items-baseline overflow-visible">
+        <span className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light leading-normal text-transparent bg-clip-text bg-gradient-to-r from-white via-gold-bright to-gold-medium tracking-normal py-1 pr-3 inline-block select-none">
           {prefix}{count.toLocaleString()}{suffix}
-        </div>
+        </span>
       </div>
 
       {/* Labels */}
@@ -481,23 +379,37 @@ const RevealSection: React.FC<RevealSectionProps> = ({
   );
 };
 
-// 3D Interactive Tilt Card Component
+// 3D Interactive Tilt Card Component with Specular Glare & Depth Elevation
 interface Card3DProps {
   children: React.ReactNode;
   className?: string;
   depth?: number;
+  glare?: boolean;
+  translateZ?: number;
   onClick?: () => void;
 }
 
-const Card3D: React.FC<Card3DProps> = ({ children, className = '', depth = 12, onClick }) => {
+const Card3D: React.FC<Card3DProps> = ({ 
+  children, 
+  className = '', 
+  depth = 12, 
+  glare = true,
+  translateZ = 20,
+  onClick 
+}) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const mouseXSpring = useSpring(x, { stiffness: 200, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 200, damping: 20 });
+  const mouseXSpring = useSpring(x, { stiffness: 260, damping: 24 });
+  const mouseYSpring = useSpring(y, { stiffness: 260, damping: 24 });
 
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [`${depth}deg`, `-${depth}deg`]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [`-${depth}deg`, `${depth}deg`]);
+  
+  // Dynamic Glare Position
+  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ['0%', '100%']);
+  const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ['0%', '100%']);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -511,7 +423,10 @@ const Card3D: React.FC<Card3DProps> = ({ children, className = '', depth = 12, o
     y.set(yPct);
   };
 
+  const handleMouseEnter = () => setIsHovered(true);
+
   const handleMouseLeave = () => {
+    setIsHovered(false);
     x.set(0);
     y.set(0);
   };
@@ -519,49 +434,75 @@ const Card3D: React.FC<Card3DProps> = ({ children, className = '', depth = 12, o
   return (
     <motion.div
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
       style={{
         rotateX,
         rotateY,
         transformStyle: 'preserve-3d',
+        perspective: 1200,
       }}
-      whileHover={{ scale: 1.03 }}
+      whileHover={{ scale: 1.025 }}
       transition={{ type: 'spring', stiffness: 350, damping: 25 }}
       className={`relative ${className}`}
     >
-      <div style={{ transform: 'translateZ(15px)' }} className="w-full h-full">
+      {/* 3D Elevated Layer */}
+      <div 
+        style={{ 
+          transform: `translateZ(${translateZ}px)`,
+          transformStyle: 'preserve-3d'
+        }} 
+        className="w-full h-full relative"
+      >
         {children}
+
+        {/* Specular 3D Glare Sheen Overlay */}
+        {glare && (
+          <motion.div
+            style={{
+              background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,220,130,0.18) 0%, transparent 65%)`,
+              opacity: isHovered ? 1 : 0,
+            }}
+            className="absolute inset-0 rounded-[inherit] pointer-events-none transition-opacity duration-300 z-30"
+          />
+        )}
       </div>
     </motion.div>
   );
 };
 
-const FloatingOrbs: React.FC = () => {
+// Clean Luxury Ambient Depth Canvas (No Distracting Rings)
+const Geometric3DBackdrop: React.FC = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 select-none">
+      {/* Soft Ambient Golden Atmospheric Flares */}
       <motion.div
         animate={{
-          x: [0, 45, -35, 0],
-          y: [0, -45, 25, 0],
-          scale: [1, 1.25, 0.9, 1],
-          opacity: [0.15, 0.35, 0.15],
+          x: [0, 30, -25, 0],
+          y: [0, -30, 20, 0],
+          scale: [1, 1.1, 0.95, 1],
+          opacity: [0.15, 0.25, 0.15],
         }}
         transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/4 left-10 w-96 h-96 bg-gold-medium/10 rounded-full blur-3xl"
+        className="absolute top-1/4 left-8 w-[450px] h-[450px] bg-gradient-to-tr from-gold-medium/10 to-transparent rounded-full blur-3xl"
       />
       <motion.div
         animate={{
-          x: [0, -55, 35, 0],
-          y: [0, 45, -45, 0],
-          scale: [1, 0.85, 1.2, 1],
-          opacity: [0.1, 0.28, 0.1],
+          x: [0, -35, 25, 0],
+          y: [0, 30, -30, 0],
+          scale: [1, 0.9, 1.1, 1],
+          opacity: [0.1, 0.2, 0.1],
         }}
-        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 3 }}
-        className="absolute bottom-1/3 right-10 w-96 h-96 bg-gold-dark/15 rounded-full blur-3xl"
+        transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        className="absolute bottom-1/4 right-8 w-[450px] h-[450px] bg-gradient-to-bl from-gold-dark/15 to-transparent rounded-full blur-3xl"
       />
     </div>
   );
+};
+
+const FloatingOrbs: React.FC = () => {
+  return <Geometric3DBackdrop />;
 };
 
 const whyChooseHeadingsList = [
@@ -671,7 +612,7 @@ const WhyChooseStickySequencer: React.FC = () => {
   return (
     <div ref={containerRef} className="relative h-[650vh]">
       {/* Responsive Locked Viewport with 100dvh support */}
-      <div className="sticky top-0 h-screen h-[100dvh] w-full flex flex-col items-center justify-between px-4 sm:px-6 md:px-8 text-center overflow-hidden z-10 select-none py-10 sm:py-16 md:py-20">
+      <div className="sticky top-0 h-screen h-[100dvh] w-full flex flex-col items-center justify-between px-4 sm:px-6 md:px-8 text-center overflow-hidden z-10 select-none pt-24 sm:pt-28 md:pt-32 pb-6 sm:pb-8">
         
         {/* Ambient Radial Golden Spotlight */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[850px] h-[700px] sm:h-[850px] bg-[radial-gradient(circle,rgba(212,175,55,0.08)_0%,transparent_70%)] pointer-events-none" />
@@ -680,34 +621,34 @@ const WhyChooseStickySequencer: React.FC = () => {
         <div className="w-full max-w-5xl flex flex-col items-center justify-between h-full relative z-10">
           
           {/* FIXED HEADER */}
-          <div className="w-full space-y-1.5 sm:space-y-2 flex-shrink-0">
-            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 rounded-full bg-gold-medium/10 border border-gold-medium/25 shadow-sm">
+          <div className="w-full space-y-1 sm:space-y-1.5 flex-shrink-0">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-gold-medium/10 border border-gold-medium/25 shadow-sm">
               <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5 text-gold-bright" />
               <span className="text-[9px] sm:text-xs font-semibold tracking-[0.25em] text-gold-bright uppercase">
                 WHY CHOOSE LAS COLINAS
               </span>
             </div>
 
-            <h2 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-light text-gray-200 tracking-wide font-serif">
+            <h2 className="text-base sm:text-xl md:text-2xl lg:text-3xl font-light text-gray-200 tracking-wide font-serif">
               They choose us because...
             </h2>
           </div>
 
           {/* CENTER DISPLAY */}
-          <div className="w-full flex-1 flex items-center justify-center relative my-auto py-2">
-            <div className="w-full min-h-[260px] sm:min-h-[300px] md:min-h-[340px] flex items-center justify-center relative">
+          <div className="w-full flex-1 flex items-center justify-center relative my-auto py-1 sm:py-2">
+            <div className="w-full min-h-[220px] sm:min-h-[260px] md:min-h-[280px] flex items-center justify-center relative">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentItem.number}
-                  initial={{ opacity: 0, y: 25, filter: 'blur(6px)' }}
+                  initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
                   animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                  exit={{ opacity: 0, y: -25, filter: 'blur(6px)' }}
+                  exit={{ opacity: 0, y: -20, filter: 'blur(6px)' }}
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                   className="flex flex-col items-center justify-center px-2 sm:px-4 w-full"
                 >
                   {/* Meta Badge */}
-                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-2.5 sm:mb-3.5">
-                    <span className="font-mono text-[11px] sm:text-xs md:text-sm font-bold text-gold-bright px-2.5 sm:px-3 py-0.5 rounded-full bg-gold-medium/15 border border-gold-medium/30 shadow-md">
+                  <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-2 sm:mb-2.5">
+                    <span className="font-mono text-[10px] sm:text-xs md:text-sm font-bold text-gold-bright px-2.5 sm:px-3 py-0.5 rounded-full bg-gold-medium/15 border border-gold-medium/30 shadow-md">
                       Pillar {currentItem.number} of {whyChooseHeadingsList.length}
                     </span>
                     <span className="text-[10px] sm:text-xs font-mono tracking-widest text-gold-medium/80 uppercase font-semibold">
@@ -720,28 +661,24 @@ const WhyChooseStickySequencer: React.FC = () => {
                     initial={{ scale: 0.85, rotate: -8 }}
                     animate={{ scale: 1, rotate: 0 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                    className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-gold-medium/15 border-2 border-gold-medium/40 flex items-center justify-center mb-3 sm:mb-4 text-gold-bright shadow-2xl"
+                    className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-xl sm:rounded-2xl bg-gold-medium/15 border-2 border-gold-medium/40 flex items-center justify-center mb-2 sm:mb-3 text-gold-bright shadow-2xl"
                   >
-                    <Icon className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" />
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7" />
                   </motion.div>
 
                   {/* Giant Serif Heading */}
-                  <h3 className="font-serif text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.15] max-w-4xl mx-auto mb-2.5 sm:mb-3.5">
+                  <h3 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-white tracking-tight leading-[1.2] max-w-3xl mx-auto mb-2 sm:mb-3">
                     {currentItem.title}
                   </h3>
 
                   {/* Subtext */}
-                  <p className="text-gray-300 text-xs sm:text-sm md:text-base font-light max-w-xl sm:max-w-2xl mx-auto leading-relaxed">
+                  <p className="text-gray-300 text-xs sm:text-sm md:text-base font-light max-w-xl sm:max-w-2xl mx-auto leading-relaxed px-2">
                     {currentItem.subtext}
                   </p>
                 </motion.div>
               </AnimatePresence>
             </div>
           </div>
-
-          {/* Subtle bottom spacer */}
-          <div className="h-4 sm:h-6 w-full flex-shrink-0" />
-
         </div>
       </div>
     </div>
@@ -952,7 +889,6 @@ interface HomeProps {
 }
 
 export const Home: React.FC<HomeProps> = () => {
-  const [activeTab, setActiveTab] = useState(0);
   const alacarteCarouselRef = useRef<HTMLDivElement>(null);
   const [isAutoPlayPaused, setIsAutoPlayPaused] = useState(false);
   const portfolioCarouselRef = useRef<HTMLDivElement>(null);
@@ -960,12 +896,39 @@ export const Home: React.FC<HomeProps> = () => {
   const teamCarouselRef = useRef<HTMLDivElement>(null);
   const [isTeamAutoPlayPaused, setIsTeamAutoPlayPaused] = useState(false);
 
-  const [ctaForm, setCtaForm] = useState({ property: '', service: 'Full Hotel Operations Management', contact: '' });
+  const [ctaForm, setCtaForm] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    property: '',
+    service: 'Full Hotel Operations Management',
+    message: '',
+  });
+  const [isCtaSubmitting, setIsCtaSubmitting] = useState(false);
   const [ctaSubmitted, setCtaSubmitted] = useState(false);
 
   const handleCtaSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setCtaSubmitted(true);
+    if (!ctaForm.name || !ctaForm.email) return;
+    setIsCtaSubmitting(true);
+    setTimeout(() => {
+      setIsCtaSubmitting(false);
+      setCtaSubmitted(true);
+    }, 1200);
+  };
+
+  const handleCtaReset = () => {
+    setCtaForm({
+      name: '',
+      company: '',
+      email: '',
+      phone: '',
+      property: '',
+      service: 'Full Hotel Operations Management',
+      message: '',
+    });
+    setCtaSubmitted(false);
   };
 
   const handleNav = (target: string) => {
@@ -975,7 +938,7 @@ export const Home: React.FC<HomeProps> = () => {
       team: 'team-showcase',
       about: 'about-teaser',
       contact: 'cta-section',
-      lifecycle: 'lifecycle-solutions',
+      lifecycle: 'services-showcase',
       hotel: 'hotel-management',
       'why-choose': 'why-choose-us',
       'why-choose-us': 'why-choose-us',
@@ -1269,7 +1232,7 @@ export const Home: React.FC<HomeProps> = () => {
                 <motion.button
                   whileHover={{ scale: 1.05, boxShadow: "0px 0px 20px rgba(212, 175, 55, 0.3)" }}
                   whileTap={{ scale: 0.97 }}
-                  onClick={() => handleNav('lifecycle-solutions')}
+                  onClick={() => handleNav('services')}
                   className="px-8 py-3 bg-navy-dark border border-gold-medium/40 hover:border-gold-bright hover:bg-gold-medium hover:text-navy-dark text-white font-bold text-xs uppercase tracking-widest rounded transition-all duration-300 shadow-lg flex items-center gap-3 cursor-pointer group"
                 >
                   <span>LEARN MORE</span>
@@ -1750,225 +1713,6 @@ export const Home: React.FC<HomeProps> = () => {
         </RevealSection>
       </section>
 
-      {/* Comprehensive Lifecycle Solutions Section (Tabs on Left Side & Content on Right Side) */}
-      <section id="lifecycle-solutions" className="py-10 bg-[#050913] border-t border-gold-medium/20 px-4 sm:px-6 lg:px-8 text-left relative overflow-hidden">
-        {/* Subtle Architectural Hatch Pinstripe Texture */}
-        <div className="absolute inset-0 opacity-[0.03] bg-[repeating-linear-gradient(45deg,#d4af37,#d4af37_1px,transparent_1px,transparent_24px)] pointer-events-none" />
-        {/* Ambient Corner Illumination */}
-        <div className="absolute bottom-0 right-0 w-[550px] h-[550px] bg-[radial-gradient(circle_at_100%_100%,rgba(212,175,55,0.06)_0%,transparent_60%)] pointer-events-none" />
-        <FloatingOrbs />
-
-        <RevealSection type="fade-left" className="max-w-7xl mx-auto relative z-10">
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gold-medium/10 border border-gold-medium/25 mb-4">
-              <Sparkles className="w-3.5 h-3.5 text-gold-bright" />
-              <span className="text-[10px] sm:text-xs font-semibold tracking-[0.25em] text-gold-bright uppercase">
-                Comprehensive Lifecycle Solutions
-              </span>
-            </div>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-wide leading-tight">
-              Unlocking Strategic Advantages
-            </h2>
-            <div className="flex items-center justify-center gap-2 mt-4">
-              <span className="h-[1px] w-12 bg-gradient-to-r from-transparent to-gold-medium" />
-              <span className="w-1.5 h-1.5 rotate-45 border border-gold-bright bg-gold-medium" />
-              <span className="h-[1px] w-12 bg-gradient-to-l from-transparent to-gold-medium" />
-            </div>
-            <p className="text-gray-400 text-sm sm:text-base font-light mt-4 leading-relaxed">
-              We provide tailored solutions at every step of your hotel asset's journey, from acquisition and development to ongoing operations and revenue optimization.
-            </p>
-          </div>
-
-          {/* 2-Column Tabs Container: Left Tabs & Right Content */}
-          <div className="grid lg:grid-cols-12 gap-8 items-start">
-            
-            {/* LEFT SIDE: Vertical Tabs Navigation */}
-            <div className="lg:col-span-5 space-y-3">
-              <div className="text-xs font-mono font-bold tracking-widest text-gold-medium/70 uppercase px-2 mb-2">
-                Strategic Lifecycle Pillars
-              </div>
-              {lifecycleTabs.map((tab, index) => {
-                const Icon = tab.icon;
-                const isActive = activeTab === index;
-                return (
-                  <motion.button
-                    key={tab.id}
-                    onClick={() => setActiveTab(index)}
-                    whileHover={{ x: 4 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`w-full text-left p-4 sm:p-5 rounded-xl transition-all duration-300 flex items-center justify-between group cursor-pointer border relative overflow-hidden ${
-                      isActive
-                        ? 'bg-gradient-to-r from-navy-dark via-navy-dark/95 to-navy-medium/90 border-gold-medium/60 shadow-xl shadow-gold-medium/5'
-                        : 'bg-navy-dark/50 border-gold-medium/10 hover:border-gold-medium/30 hover:bg-navy-dark/80'
-                    }`}
-                  >
-                    {/* Active Left Indicator Bar */}
-                    {isActive && (
-                      <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-gold-bright via-gold-medium to-gold-dark" />
-                    )}
-
-                    <div className="flex items-center gap-3.5 pl-1 sm:pl-2">
-                      <div
-                        className={`w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                          isActive
-                            ? 'bg-gold-medium text-navy-dark shadow-md shadow-gold-medium/20'
-                            : 'bg-navy-medium border border-gold-medium/15 text-gold-medium group-hover:border-gold-medium/40 group-hover:text-gold-bright'
-                        }`}
-                      >
-                        <Icon className="w-5 h-5" />
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className={`text-[10px] font-mono font-bold uppercase tracking-wider ${
-                            isActive ? 'text-gold-bright' : 'text-gray-500'
-                          }`}>
-                            {tab.number}
-                          </span>
-                          <h3
-                            className={`text-sm sm:text-base font-serif tracking-wide font-medium transition-colors ${
-                              isActive ? 'text-white' : 'text-gray-300 group-hover:text-white'
-                            }`}
-                          >
-                            {tab.title}
-                          </h3>
-                        </div>
-                        <p className={`text-[11px] font-light mt-0.5 transition-colors ${
-                          isActive ? 'text-gold-medium/90' : 'text-gray-400 group-hover:text-gray-300'
-                        }`}>
-                          {tab.subtitle}
-                        </p>
-                      </div>
-                    </div>
-
-                    <ChevronRight
-                      className={`w-4 h-4 transition-transform duration-300 flex-shrink-0 ${
-                        isActive
-                          ? 'text-gold-bright translate-x-0.5'
-                          : 'text-gray-600 group-hover:text-gold-medium group-hover:translate-x-0.5'
-                      }`}
-                    />
-                  </motion.button>
-                );
-              })}
-
-              {/* Bottom Quick Metric Highlight */}
-              <div className="p-4 rounded-xl bg-navy-dark/40 border border-gold-medium/15 flex items-center justify-between mt-6">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-                  <span className="text-xs text-gray-300 font-medium">100% Owner Aligned Execution</span>
-                </div>
-                <button
-                  onClick={() => handleNav('services')}
-                  className="text-xs text-gold-medium hover:text-gold-bright font-bold uppercase tracking-wider flex items-center gap-1 transition-colors cursor-pointer hover:underline"
-                >
-                  <span>All Services</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-
-            {/* RIGHT SIDE: Compact Streamlined Active Tab Content */}
-            <div className="lg:col-span-7">
-              <div className="relative rounded-2xl bg-navy-dark/95 border border-gold-medium/30 p-6 sm:p-8 shadow-2xl overflow-hidden transition-all duration-500 space-y-5">
-                {/* Background ambient glow */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-gold-medium/10 rounded-full blur-3xl pointer-events-none" />
-
-                <motion.div
-                  key={activeTab}
-                  initial={{ opacity: 0, y: 15, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  transition={{ duration: 0.4, ease: 'easeOut' }}
-                  className="space-y-5"
-                >
-                  {/* Top Badge & Number */}
-                  <div className="flex items-center justify-between border-b border-gold-medium/15 pb-3.5">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-medium/10 border border-gold-medium/20">
-                      <Sparkles className="w-3 h-3 text-gold-bright" />
-                      <span className="text-[10px] font-sans tracking-[0.2em] text-gold-bright uppercase font-semibold">
-                        {lifecycleTabs[activeTab].tagline}
-                      </span>
-                    </div>
-                    <span className="font-mono text-xs font-bold text-gold-medium/60 tracking-widest uppercase">
-                      Pillar {lifecycleTabs[activeTab].number} of 04
-                    </span>
-                  </div>
-
-                  {/* Headline & Concise Description */}
-                  <div>
-                    <h3 className="font-serif text-xl sm:text-2xl text-white font-light tracking-wide mb-2 leading-snug">
-                      {lifecycleTabs[activeTab].headline}
-                    </h3>
-                    <p className="text-gray-300 text-xs sm:text-sm font-light leading-relaxed">
-                      {lifecycleTabs[activeTab].description}
-                    </p>
-                  </div>
-
-                  {/* 2 Key Metric Stat Cards (Compact) */}
-                  <div className="grid grid-cols-2 gap-3.5">
-                    {lifecycleTabs[activeTab].stats.map((stat, sIdx) => (
-                      <motion.div
-                        key={sIdx}
-                        whileHover={{ y: -3, scale: 1.02 }}
-                        className="p-3.5 rounded-xl bg-navy-medium/80 border border-gold-medium/20 flex flex-col justify-center text-left shadow-sm"
-                      >
-                        <div className="font-serif text-lg sm:text-xl font-semibold text-gold-bright">
-                          {stat.value}
-                        </div>
-                        <div className="text-[10px] sm:text-[11px] text-gray-300 font-light tracking-wide mt-0.5">
-                          {stat.label}
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Compact 2-Column Capability Checklist */}
-                  <div className="pt-3 border-t border-gold-medium/15">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {lifecycleTabs[activeTab].features.map((feat, fIdx) => (
-                        <motion.div 
-                          key={fIdx} 
-                          whileHover={{ x: 4 }}
-                          className="flex items-center gap-2.5 text-xs text-gray-200 font-light"
-                        >
-                          <div className="w-4 h-4 rounded-full bg-gold-medium/15 border border-gold-medium/30 flex items-center justify-center flex-shrink-0">
-                            <Check className="w-2.5 h-2.5 text-gold-bright" />
-                          </div>
-                          <span className="truncate">{feat}</span>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Streamlined Action Button */}
-                  <div className="flex items-center justify-between pt-3 border-t border-gold-medium/10">
-                    <motion.button
-                      whileHover={{ scale: 1.04, boxShadow: "0px 0px 20px rgba(212, 175, 55, 0.3)" }}
-                      whileTap={{ scale: 0.97 }}
-                      onClick={() => handleNav('services')}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-gold-medium via-gold-bright to-gold-medium text-navy-dark font-bold tracking-widest text-[11px] uppercase rounded shadow-lg transition-all duration-300 cursor-pointer"
-                    >
-                      <span>Explore Pillar Services</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </motion.button>
-
-                    <button
-                      onClick={() => handleNav('contact')}
-                      className="text-[11px] font-bold tracking-wider text-gold-medium hover:text-gold-bright uppercase transition-colors flex items-center gap-1 cursor-pointer hover:underline"
-                    >
-                      <span>Consultation</span>
-                      <ChevronRight className="w-3 h-3" />
-                    </button>
-                  </div>
-                </motion.div>
-
-              </div>
-            </div>
-
-          </div>
-        </RevealSection>
-      </section>
-
       {/* OUR PORTFOLIO SECTION (MATCHING DESIGN 1) */}
       <section id="portfolio-showcase" className="py-10 bg-gradient-to-b from-[#090f1f] via-[#0e172e] to-[#070c18] border-t border-gold-medium/20 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
         {/* Gallery Fine Dot Grid */}
@@ -2208,10 +1952,10 @@ export const Home: React.FC<HomeProps> = () => {
         <RevealSection type="zoom-in" className="max-w-7xl mx-auto relative z-10">
           <div className="rounded-3xl border border-gold-medium/30 bg-gradient-to-br from-navy-dark via-navy-medium/90 to-navy-dark p-8 sm:p-12 lg:p-14 shadow-2xl relative overflow-hidden">
             
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
               
-              {/* Left Column: Strategic Executive Pitch */}
-              <div className="lg:col-span-7 space-y-6">
+              {/* Left Column: Strategic Executive Pitch (Content on Left Side) */}
+              <div className="lg:col-span-6 space-y-6">
                 
                 {/* Eyebrow */}
                 <div className="flex items-center gap-3">
@@ -2281,9 +2025,9 @@ export const Home: React.FC<HomeProps> = () => {
               </div>
 
               {/* Right Column: Interactive Quick Proposal Box */}
-              <div className="lg:col-span-5">
+              <div className="lg:col-span-6">
                 <Card3D depth={6} className="w-full">
-                  <div className="p-6 sm:p-8 rounded-2xl bg-navy-dark/90 backdrop-blur-md border border-gold-medium/35 shadow-2xl relative overflow-hidden">
+                  <div className="p-6 sm:p-8 rounded-2xl bg-navy-dark/95 backdrop-blur-md border border-gold-medium/35 shadow-2xl relative overflow-hidden text-left">
                     
                     {/* Card Header */}
                     <div className="flex items-center gap-3 mb-5 border-b border-gold-medium/15 pb-4">
@@ -2291,77 +2035,152 @@ export const Home: React.FC<HomeProps> = () => {
                         <ShieldCheck className="w-5 h-5" />
                       </div>
                       <div>
-                        <h3 className="font-serif text-base font-semibold text-white">
-                          Request a Management Proposal
+                        <h3 className="font-serif text-base sm:text-lg font-semibold text-white">
+                          Request a Management Consultation
                         </h3>
-                        <p className="text-[10px] text-gold-medium font-light tracking-wide">
-                          Confidential analysis & tailored roadmap
+                        <p className="text-[10px] sm:text-xs text-gold-bright/90 font-light tracking-wide">
+                          Confidential property evaluation & tailored roadmap
                         </p>
                       </div>
                     </div>
 
                     {ctaSubmitted ? (
-                      <div className="py-8 text-center space-y-3">
-                        <div className="w-12 h-12 rounded-full bg-gold-medium/20 border border-gold-bright text-gold-bright mx-auto flex items-center justify-center shadow-lg">
-                          <Check className="w-6 h-6" />
+                      <div className="py-10 text-center space-y-4">
+                        <div className="w-14 h-14 rounded-full bg-gold-medium/20 border border-gold-bright text-gold-bright mx-auto flex items-center justify-center shadow-lg">
+                          <Check className="w-7 h-7" />
                         </div>
-                        <h4 className="font-serif text-base text-white font-semibold">Thank You for Your Inquiry</h4>
-                        <p className="text-xs text-gray-300 font-light">Our executive leadership team has received your details and will connect with you shortly.</p>
+                        <h4 className="font-serif text-lg text-white font-semibold">Thank You, {ctaForm.name || 'Partner'}</h4>
+                        <p className="text-xs text-gray-300 font-light max-w-sm mx-auto leading-relaxed">
+                          Your proposal request has been received. Our executive leadership team will review your property details and contact you shortly.
+                        </p>
+                        <div className="pt-2">
+                          <Button
+                            variant="gold-outline"
+                            size="sm"
+                            onClick={handleCtaReset}
+                          >
+                            Submit Another Request
+                          </Button>
+                        </div>
                       </div>
                     ) : (
                       <form onSubmit={handleCtaSubmit} className="space-y-3.5">
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <div>
+                            <Label className="block text-[10px] uppercase tracking-wider text-gray-300 font-semibold mb-1">
+                              Your Name *
+                            </Label>
+                            <Input
+                              type="text"
+                              required
+                              placeholder="Full Name"
+                              value={ctaForm.name}
+                              onChange={(e) => setCtaForm({ ...ctaForm, name: e.target.value })}
+                              className="bg-navy-medium/70 text-xs placeholder:text-gray-500 h-10"
+                            />
+                          </div>
+                          <div>
+                            <Label className="block text-[10px] uppercase tracking-wider text-gray-300 font-semibold mb-1">
+                              Company / Hotel Group
+                            </Label>
+                            <Input
+                              type="text"
+                              placeholder="e.g. Acme Hospitality LLC"
+                              value={ctaForm.company}
+                              onChange={(e) => setCtaForm({ ...ctaForm, company: e.target.value })}
+                              className="bg-navy-medium/70 text-xs placeholder:text-gray-500 h-10"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <div>
+                            <Label className="block text-[10px] uppercase tracking-wider text-gray-300 font-semibold mb-1">
+                              Email Address *
+                            </Label>
+                            <Input
+                              type="email"
+                              required
+                              placeholder="contact@ownership.com"
+                              value={ctaForm.email}
+                              onChange={(e) => setCtaForm({ ...ctaForm, email: e.target.value })}
+                              className="bg-navy-medium/70 text-xs placeholder:text-gray-500 h-10"
+                            />
+                          </div>
+                          <div>
+                            <Label className="block text-[10px] uppercase tracking-wider text-gray-300 font-semibold mb-1">
+                              Phone Number
+                            </Label>
+                            <Input
+                              type="tel"
+                              placeholder="(214) 000-0000"
+                              value={ctaForm.phone}
+                              onChange={(e) => setCtaForm({ ...ctaForm, phone: e.target.value })}
+                              className="bg-navy-medium/70 text-xs placeholder:text-gray-500 h-10"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-3">
+                          <div>
+                            <Label className="block text-[10px] uppercase tracking-wider text-gray-300 font-semibold mb-1">
+                              Property Name / Location
+                            </Label>
+                            <Input
+                              type="text"
+                              placeholder="e.g. Austin Boutique Hotel"
+                              value={ctaForm.property}
+                              onChange={(e) => setCtaForm({ ...ctaForm, property: e.target.value })}
+                              className="bg-navy-medium/70 text-xs placeholder:text-gray-500 h-10"
+                            />
+                          </div>
+                          <div>
+                            <Label className="block text-[10px] uppercase tracking-wider text-gray-300 font-semibold mb-1">
+                              Primary Management Scope
+                            </Label>
+                            <select
+                              value={ctaForm.service}
+                              onChange={(e) => setCtaForm({ ...ctaForm, service: e.target.value })}
+                              className="w-full h-10 px-3 py-1.5 rounded-lg bg-navy-medium/70 border border-gold-medium/25 text-white text-xs focus:outline-none focus:border-gold-bright focus:ring-1 focus:ring-gold-bright transition-colors"
+                            >
+                              <option value="Full Hotel Operations Management">Full Hotel Operations Management</option>
+                              <option value="Turnaround & Asset Repositioning">Turnaround & Asset Repositioning</option>
+                              <option value="Revenue Optimization & OTA Yield">Revenue Optimization & OTA Yield</option>
+                              <option value="Development & Brand PIP Oversight">Development & Brand PIP Oversight</option>
+                              <option value="Custom Advisory Consulting">Custom Advisory Consulting</option>
+                            </select>
+                          </div>
+                        </div>
+
                         <div>
-                          <label className="block text-[10px] uppercase tracking-wider text-gray-300 font-medium mb-1">
-                            Property Name / Market Location
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="e.g. Austin Boutique Hotel"
-                            value={ctaForm.property}
-                            onChange={(e) => setCtaForm({ ...ctaForm, property: e.target.value })}
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-navy-medium/70 border border-gold-medium/25 text-white text-xs placeholder:text-gray-500 focus:outline-none focus:border-gold-bright transition-colors"
+                          <Label className="block text-[10px] uppercase tracking-wider text-gray-300 font-semibold mb-1">
+                            Additional Notes / Objectives (Optional)
+                          </Label>
+                          <Textarea
+                            rows={2}
+                            placeholder="Tell us about your property and goals..."
+                            value={ctaForm.message}
+                            onChange={(e) => setCtaForm({ ...ctaForm, message: e.target.value })}
+                            className="bg-navy-medium/70 text-xs placeholder:text-gray-500 min-h-[65px] py-2"
                           />
                         </div>
 
-                        <div>
-                          <label className="block text-[10px] uppercase tracking-wider text-gray-300 font-medium mb-1">
-                            Primary Management Scope
-                          </label>
-                          <select
-                            value={ctaForm.service}
-                            onChange={(e) => setCtaForm({ ...ctaForm, service: e.target.value })}
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-navy-medium/70 border border-gold-medium/25 text-white text-xs focus:outline-none focus:border-gold-bright transition-colors"
-                          >
-                            <option value="Full Hotel Operations Management">Full Hotel Operations Management</option>
-                            <option value="Turnaround & Asset Repositioning">Turnaround & Asset Repositioning</option>
-                            <option value="Revenue Optimization & OTA Yield">Revenue Optimization & OTA Yield</option>
-                            <option value="Development & Brand PIP Oversight">Development & Brand PIP Oversight</option>
-                          </select>
-                        </div>
-
-                        <div>
-                          <label className="block text-[10px] uppercase tracking-wider text-gray-300 font-medium mb-1">
-                            Your Email or Phone
-                          </label>
-                          <input
-                            type="text"
-                            required
-                            placeholder="contact@hotelownership.com"
-                            value={ctaForm.contact}
-                            onChange={(e) => setCtaForm({ ...ctaForm, contact: e.target.value })}
-                            className="w-full px-3.5 py-2.5 rounded-lg bg-navy-medium/70 border border-gold-medium/25 text-white text-xs placeholder:text-gray-500 focus:outline-none focus:border-gold-bright transition-colors"
-                          />
-                        </div>
-
-                        <div className="pt-2">
-                          <button
+                        <div className="pt-1">
+                          <Button
                             type="submit"
-                            className="w-full py-3 bg-gold-medium hover:bg-gold-bright text-navy-dark font-bold text-xs uppercase tracking-widest rounded-lg transition-all duration-300 shadow-xl hover:shadow-gold-medium/25 flex items-center justify-center gap-2 cursor-pointer group"
+                            variant="gold"
+                            disabled={isCtaSubmitting}
+                            className="w-full h-11 text-xs"
                           >
-                            <span>Request Private Proposal</span>
-                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                          </button>
+                            {isCtaSubmitting ? (
+                              <span>Processing Consultation Request...</span>
+                            ) : (
+                              <>
+                                <span>Request Private Consultation</span>
+                                <ArrowRight className="w-4 h-4 ml-1" />
+                              </>
+                            )}
+                          </Button>
                         </div>
                       </form>
                     )}

@@ -6,6 +6,8 @@ import {
   Sparkles, ShieldCheck, HeartHandshake, Briefcase,
   Check, X
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 interface AboutProps {
   activeSubTab: PageId;
@@ -28,33 +30,31 @@ export const About: React.FC<AboutProps> = ({ activeSubTab, setActivePage }) => 
     <div className="w-full py-28 bg-navy-dark min-h-screen px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Title */}
-        <div className="text-center mb-12">
-          <span className="text-gold-medium uppercase tracking-[0.25em] text-xs font-semibold block mb-2">
+        <div className="text-center mb-12 space-y-3">
+          <Badge variant="gold">
             About Our Company
-          </span>
+          </Badge>
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-wide">
             Las Colinas Hospitality
           </h2>
-          <div className="w-16 h-[1px] bg-gold-medium mx-auto mt-4" />
+          <div className="w-16 h-[1px] bg-gold-medium mx-auto" />
         </div>
 
-        {/* Tab Buttons (Horizontal for Desktop, Vertical for Mobile) */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-16 border-b border-gold-medium/10 pb-4 max-w-5xl mx-auto">
+        {/* Tab Buttons with Shadcn Buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-16 border-b border-gold-medium/15 pb-4 max-w-5xl mx-auto">
           {tabs.map((tab) => (
-            <button
+            <Button
               key={tab.id}
+              variant={currentTab === tab.id ? 'gold' : 'ghost'}
+              size="sm"
               onClick={() => {
                 setActivePage(tab.id);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className={`px-5 py-3 text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 border-b-2 rounded-t ${
-                currentTab === tab.id
-                  ? 'text-gold-medium border-gold-medium bg-navy-medium'
-                  : 'text-gray-400 border-transparent hover:text-white hover:bg-navy-medium/30'
-              }`}
+              className="text-xs"
             >
               {tab.label}
-            </button>
+            </Button>
           ))}
         </div>
 

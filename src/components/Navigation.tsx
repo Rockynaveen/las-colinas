@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, ChevronDown } from 'lucide-react';
-
+import { Menu, ChevronDown } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 
 export type PageId = 
   | 'home' 
@@ -24,8 +37,8 @@ interface NavigationProps {
 export const Navigation: React.FC<NavigationProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('home');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isMobileAboutOpen, setIsMobileAboutOpen] = useState(false);
 
   // Monitor scroll to apply sticky navbar styles and track active on-page section
   useEffect(() => {
@@ -41,7 +54,6 @@ export const Navigation: React.FC<NavigationProps> = () => {
         { id: 'cta-section', name: 'contact' },
         { id: 'team-showcase', name: 'team' },
         { id: 'portfolio-showcase', name: 'portfolio' },
-        { id: 'lifecycle-solutions', name: 'services' },
         { id: 'hotel-management', name: 'services' },
         { id: 'services-showcase', name: 'services' },
         { id: 'why-choose-us', name: 'about' },
@@ -60,18 +72,21 @@ export const Navigation: React.FC<NavigationProps> = () => {
         }
       }
 
+      if (window.scrollY < 200) {
+        currentSection = 'home';
+      }
+
       setActiveSection(currentSection);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (target: string) => {
-    setIsMobileMenuOpen(false);
-    setIsAboutDropdownOpen(false);
+  const handleNavClick = (pageId: PageId | 'about') => {
+    setIsMobileOpen(false);
 
-    if (target === 'home') {
+    if (pageId === 'home') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
@@ -79,24 +94,24 @@ export const Navigation: React.FC<NavigationProps> = () => {
     const sectionMap: Record<string, string> = {
       'about': 'about-teaser',
       'about-overview': 'about-teaser',
-      'about-story': 'about-teaser',
+      'about-story': 'our-story',
       'about-vision': 'vision-mission',
-      'about-values': 'vision-mission',
-      'about-advantage': 'why-choose-us',
-      'about-goals': 'vision-mission',
-      'why-choose': 'why-choose-us',
-      'why-choose-us': 'why-choose-us',
+      'about-values': 'core-values',
+      'about-advantage': 'competitive-edge',
+      'about-goals': 'future-goals',
       'services': 'services-showcase',
       'portfolio': 'portfolio-showcase',
       'team': 'team-showcase',
-      'careers': 'team-showcase',
+      'careers': 'careers-section',
       'contact': 'cta-section',
     };
 
-    const targetId = sectionMap[target] || target;
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const targetId = sectionMap[pageId];
+    if (targetId) {
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
 
@@ -133,7 +148,7 @@ export const Navigation: React.FC<NavigationProps> = () => {
             />
           </div>
 
-          {/* Desktop Nav Items */}
+          {/* Desktop Nav Items with Shadcn Dropdown & Buttons */}
           <div className="hidden lg:flex items-center space-x-1">
             {/* Home */}
             <button
@@ -147,45 +162,32 @@ export const Navigation: React.FC<NavigationProps> = () => {
               Home
             </button>
 
-            {/* About (Dropdown) */}
-            <div
-              className="relative"
-              onMouseEnter={() => setIsAboutDropdownOpen(true)}
-              onMouseLeave={() => setIsAboutDropdownOpen(false)}
-            >
-              <button
-                onClick={() => handleNavClick('about')}
-                className={`flex items-center gap-1 px-4 py-2 text-xs font-semibold tracking-widest uppercase transition-all duration-300 cursor-pointer ${
-                  isAboutActive
-                    ? 'text-gold-medium border-b border-gold-medium'
-                    : 'text-gray-300 hover:text-white hover:border-b hover:border-gray-500'
-                }`}
-              >
-                <span>About Us</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${isAboutDropdownOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {/* Dropdown Menu */}
-              <div
-                className={`absolute left-0 mt-0 w-56 rounded-md shadow-xl bg-navy-medium border border-gold-medium/10 overflow-hidden transition-all duration-300 transform origin-top-left ${
-                  isAboutDropdownOpen
-                    ? 'opacity-100 scale-100 translate-y-0 visible'
-                    : 'opacity-0 scale-95 -translate-y-2 invisible pointer-events-none'
-                }`}
-              >
-                <div className="py-1">
-                  {aboutSubpages.map((sub) => (
-                    <button
-                      key={sub.id}
-                      onClick={() => handleNavClick(sub.id)}
-                      className="block w-full text-left px-4 py-3 text-xs font-medium tracking-wider text-gray-300 hover:bg-navy-light hover:text-gold-bright transition-colors duration-200 cursor-pointer"
-                    >
-                      {sub.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
+            {/* About (Shadcn DropdownMenu) */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  className={`flex items-center gap-1.5 px-4 py-2 text-xs font-semibold tracking-widest uppercase transition-all duration-300 cursor-pointer outline-none ${
+                    isAboutActive
+                      ? 'text-gold-medium border-b border-gold-medium'
+                      : 'text-gray-300 hover:text-white hover:border-b hover:border-gray-500'
+                  }`}
+                >
+                  <span>About Us</span>
+                  <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-56">
+                {aboutSubpages.map((sub) => (
+                  <DropdownMenuItem
+                    key={sub.id}
+                    onClick={() => handleNavClick(sub.id)}
+                    className="cursor-pointer py-2.5"
+                  >
+                    {sub.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* Services */}
             <button
@@ -223,115 +225,114 @@ export const Navigation: React.FC<NavigationProps> = () => {
               Our Team
             </button>
 
-            {/* Contact */}
-            <button
-              onClick={() => handleNavClick('contact')}
-              className="ml-4 px-5 py-2 text-xs font-bold tracking-widest uppercase text-navy-dark bg-gold-medium hover:bg-gold-bright transition-all duration-300 rounded shadow-md hover:shadow-gold-medium/20 hover:-translate-y-0.5 cursor-pointer"
-            >
-              Contact
-            </button>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-md text-gray-300 hover:text-white focus:outline-none transition-colors duration-200 cursor-pointer"
-            >
-              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Nav Links Overlay */}
-      <div
-        className={`lg:hidden fixed inset-x-0 top-[80px] bg-navy-dark/95 border-b border-gold-medium/15 shadow-2xl transition-all duration-300 ease-in-out z-40 ${
-          isMobileMenuOpen 
-            ? 'opacity-100 translate-y-0 visible' 
-            : 'opacity-0 -translate-y-4 invisible pointer-events-none'
-        }`}
-        style={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}
-      >
-        <div className="px-4 pt-4 pb-8 space-y-2">
-          {/* Home */}
-          <button
-            onClick={() => handleNavClick('home')}
-            className={`block w-full text-left px-4 py-3 text-sm font-semibold tracking-widest uppercase border-b border-gray-800 ${
-              activeSection === 'home' ? 'text-gold-medium' : 'text-gray-300'
-            }`}
-          >
-            Home
-          </button>
-
-          {/* About us parent with toggle */}
-          <div>
-            <button
-              onClick={() => setIsAboutDropdownOpen(!isAboutDropdownOpen)}
-              className={`flex items-center justify-between w-full text-left px-4 py-3 text-sm font-semibold tracking-widest uppercase border-b border-gray-800 ${
-                isAboutActive ? 'text-gold-medium' : 'text-gray-300'
-              }`}
-            >
-              <span>About Us</span>
-              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isAboutDropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
-
-            {/* Mobile About Submenu */}
-            <div
-              className={`pl-4 bg-navy-medium/55 transition-all duration-300 overflow-hidden ${
-                isAboutDropdownOpen ? 'max-h-64 opacity-100 py-1' : 'max-h-0 opacity-0 pointer-events-none'
-              }`}
-            >
-              {aboutSubpages.map((sub) => (
-                <button
-                  key={sub.id}
-                  onClick={() => handleNavClick(sub.id)}
-                  className="block w-full text-left px-4 py-2.5 text-xs font-semibold tracking-wider text-gray-400 hover:text-white"
-                >
-                  {sub.label}
-                </button>
-              ))}
+            {/* Contact Shadcn Button */}
+            <div className="ml-4">
+              <Button
+                variant="gold"
+                size="sm"
+                onClick={() => handleNavClick('contact')}
+              >
+                Contact
+              </Button>
             </div>
           </div>
 
-          {/* Services */}
-          <button
-            onClick={() => handleNavClick('services')}
-            className={`block w-full text-left px-4 py-3 text-sm font-semibold tracking-widest uppercase border-b border-gray-800 ${
-              activeSection === 'services' ? 'text-gold-medium' : 'text-gray-300'
-            }`}
-          >
-            Services
-          </button>
+          {/* Mobile Sheet Drawer */}
+          <div className="lg:hidden">
+            <Sheet open={isMobileOpen} onOpenChange={setIsMobileOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="text-gold-bright hover:bg-gold-medium/10">
+                  <Menu className="w-6 h-6" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[350px] p-6 flex flex-col justify-between">
+                <div>
+                  <SheetHeader className="mb-6">
+                    <SheetTitle className="text-left">
+                      <img
+                        src="/images/las-colinas-logo-white.png"
+                        alt="Las Colinas Hospitality Management"
+                        className="h-10 w-auto object-contain"
+                      />
+                    </SheetTitle>
+                  </SheetHeader>
 
-          {/* Portfolio */}
-          <button
-            onClick={() => handleNavClick('portfolio')}
-            className={`block w-full text-left px-4 py-3 text-sm font-semibold tracking-widest uppercase border-b border-gray-800 ${
-              activeSection === 'portfolio' ? 'text-gold-medium' : 'text-gray-300'
-            }`}
-          >
-            Portfolio
-          </button>
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => handleNavClick('home')}
+                      className={`block w-full text-left py-2.5 text-sm font-semibold tracking-widest uppercase border-b border-gold-medium/15 ${
+                        activeSection === 'home' ? 'text-gold-bright' : 'text-gray-300'
+                      }`}
+                    >
+                      Home
+                    </button>
 
-          {/* Team */}
-          <button
-            onClick={() => handleNavClick('team')}
-            className={`block w-full text-left px-4 py-3 text-sm font-semibold tracking-widest uppercase border-b border-gray-800 ${
-              activeSection === 'team' ? 'text-gold-medium' : 'text-gray-300'
-            }`}
-          >
-            Our Team
-          </button>
+                    <div>
+                      <button
+                        onClick={() => setIsMobileAboutOpen(!isMobileAboutOpen)}
+                        className={`flex items-center justify-between w-full text-left py-2.5 text-sm font-semibold tracking-widest uppercase border-b border-gold-medium/15 ${
+                          isAboutActive ? 'text-gold-bright' : 'text-gray-300'
+                        }`}
+                      >
+                        <span>About Us</span>
+                        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isMobileAboutOpen ? 'rotate-180 text-gold-bright' : ''}`} />
+                      </button>
 
-          {/* Contact */}
-          <div className="pt-4">
-            <button
-              onClick={() => handleNavClick('contact')}
-              className="w-full py-3.5 text-center text-xs font-bold tracking-widest uppercase text-navy-dark bg-gold-medium hover:bg-gold-bright transition-all duration-300 rounded shadow-md cursor-pointer"
-            >
-              Contact Us
-            </button>
+                      {isMobileAboutOpen && (
+                        <div className="pl-4 py-2 space-y-2 bg-navy-medium/40 rounded-lg mt-1 border border-gold-medium/10">
+                          {aboutSubpages.map((sub) => (
+                            <button
+                              key={sub.id}
+                              onClick={() => handleNavClick(sub.id)}
+                              className="block w-full text-left py-1.5 text-xs font-medium tracking-wider text-gray-400 hover:text-gold-bright"
+                            >
+                              {sub.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <button
+                      onClick={() => handleNavClick('services')}
+                      className={`block w-full text-left py-2.5 text-sm font-semibold tracking-widest uppercase border-b border-gold-medium/15 ${
+                        activeSection === 'services' ? 'text-gold-bright' : 'text-gray-300'
+                      }`}
+                    >
+                      Services
+                    </button>
+
+                    <button
+                      onClick={() => handleNavClick('portfolio')}
+                      className={`block w-full text-left py-2.5 text-sm font-semibold tracking-widest uppercase border-b border-gold-medium/15 ${
+                        activeSection === 'portfolio' ? 'text-gold-bright' : 'text-gray-300'
+                      }`}
+                    >
+                      Portfolio
+                    </button>
+
+                    <button
+                      onClick={() => handleNavClick('team')}
+                      className={`block w-full text-left py-2.5 text-sm font-semibold tracking-widest uppercase border-b border-gold-medium/15 ${
+                        activeSection === 'team' ? 'text-gold-bright' : 'text-gray-300'
+                      }`}
+                    >
+                      Our Team
+                    </button>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-gold-medium/15">
+                  <Button
+                    variant="gold"
+                    className="w-full"
+                    onClick={() => handleNavClick('contact')}
+                  >
+                    Contact Us
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, useMotionValueEvent, AnimatePresence, type Variants } from 'framer-motion';
 import { Carousel } from '../components/Carousel';
 import { 
-  Shield, TrendingUp, Building2, Award, ArrowRight, 
+  Shield, TrendingUp, Building2, Building, Award, ArrowRight, 
   ChevronRight, ChevronLeft, Sparkles, Check, DollarSign, ShieldCheck, LineChart, 
   Wrench, Globe, Users, Layers, Compass, KeyRound, Clock, BarChart3, 
   Sliders, Activity, Megaphone, UserCheck, Search, Target, Handshake, Eye, Star,
@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { type PageId } from '../components/Navigation';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -1040,7 +1041,6 @@ export const Home: React.FC<HomeProps> = () => {
       services: 'services-showcase',
       portfolio: 'portfolio-showcase',
       team: 'team-showcase',
-      clients: 'clients-showcase',
       about: 'about-teaser',
       contact: 'cta-section',
       lifecycle: 'services-showcase',
@@ -2044,168 +2044,6 @@ export const Home: React.FC<HomeProps> = () => {
             </div>
 
           </div>
-        </RevealSection>
-      </section>
-
-      {/* OUR CLIENTS & BRAND PARTNERS SECTION */}
-      <section id="clients-showcase" className="py-12 bg-gradient-to-b from-[#080e1e] via-[#0e1933] to-[#080e1e] border-t border-gold-medium/20 px-4 sm:px-6 lg:px-8 text-center relative overflow-hidden">
-        {/* Soft Ambient Golden Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-[radial-gradient(circle,rgba(212,175,55,0.06)_0%,transparent_70%)] pointer-events-none" />
-        <FloatingOrbs />
-
-        <RevealSection type="fade-up" className="max-w-7xl mx-auto relative z-10 space-y-12">
-          
-          {/* Section Header */}
-          <div className="max-w-3xl mx-auto space-y-3">
-            <div className="flex items-center justify-center gap-3">
-              <span className="h-[1px] w-10 bg-gold-medium/60" />
-              <span className="text-[11px] font-semibold tracking-[0.25em] text-gold-bright uppercase">
-                OUR CLIENTS & BRAND AFFILIATIONS
-              </span>
-              <span className="h-[1px] w-10 bg-gold-medium/60" />
-            </div>
-
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-wide leading-tight">
-              Trusted by Leading Global Brands & Hotel Owners
-            </h2>
-
-            <div className="w-12 h-[1.5px] bg-gold-medium mx-auto mt-3" />
-
-            <p className="text-gray-300 text-xs sm:text-sm font-light leading-relaxed max-w-2xl mx-auto">
-              We operate and manage properties across leading hospitality franchise systems, institutional investment groups, and distinguished independent boutique portfolios.
-            </p>
-          </div>
-
-          {/* 6 Global Brand Affiliations & Client Groups (3D Cards) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 text-left">
-            {clientBrandsData.map((brand) => (
-              <Card3D
-                key={brand.id}
-                depth={10}
-                className="h-full"
-              >
-                <div className="bg-navy-dark/85 backdrop-blur-md border border-gold-medium/25 hover:border-gold-bright/60 rounded-2xl p-6 transition-all duration-300 flex flex-col justify-between h-full group hover:shadow-xl hover:shadow-gold-medium/10 relative overflow-hidden">
-                  {/* Ambient Corner Flare */}
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-gold-medium/5 rounded-full blur-xl group-hover:bg-gold-medium/15 transition-all pointer-events-none" />
-
-                  <div>
-                    {/* Top Category Badge */}
-                    <div className="flex items-center justify-between gap-2 mb-3">
-                      <span className="text-[9px] font-mono tracking-widest uppercase text-gold-medium font-semibold px-2 py-0.5 rounded bg-gold-medium/10 border border-gold-medium/20">
-                        {brand.category}
-                      </span>
-                      <span className="text-[10px] font-mono text-gold-bright/90 font-medium">
-                        {brand.metrics}
-                      </span>
-                    </div>
-
-                    {/* Brand Name */}
-                    <h3 className="font-serif text-lg sm:text-xl font-medium text-white mb-2 group-hover:text-gold-bright transition-colors tracking-wide">
-                      {brand.name}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-gray-300 text-xs sm:text-[13px] font-light leading-relaxed mb-4">
-                      {brand.description}
-                    </p>
-                  </div>
-
-                  {/* Bottom Verification Strip */}
-                  <div className="pt-3 border-t border-gold-medium/15 flex items-center justify-between text-xs">
-                    <span className="text-[11px] text-gray-400 font-light flex items-center gap-1.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-gold-bright flex-shrink-0" />
-                      <span>{brand.badge}</span>
-                    </span>
-                    <span className="text-[10px] font-mono text-gold-medium group-hover:text-gold-bright transition-colors">Verified</span>
-                  </div>
-                </div>
-              </Card3D>
-            ))}
-          </div>
-
-          {/* Client Testimonials / Owner Endorsements */}
-          <div className="pt-6 space-y-6">
-            <div className="text-center max-w-2xl mx-auto">
-              <span className="text-[10px] font-mono tracking-widest text-gold-medium uppercase font-semibold block mb-1">
-                OWNER ENDORSEMENTS
-              </span>
-              <h3 className="font-serif text-2xl sm:text-3xl text-white font-light tracking-wide">
-                What Hotel Owners Say
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-              {testimonialsData.map((item) => (
-                <Card3D
-                  key={item.id}
-                  depth={8}
-                  className="h-full"
-                >
-                  <div className="bg-navy-medium/85 backdrop-blur-md border border-gold-medium/25 hover:border-gold-medium/55 rounded-2xl p-6 sm:p-7 flex flex-col justify-between h-full transition-all duration-300 group shadow-lg">
-                    <div>
-                      {/* 5 Stars Rating & Quote Icon */}
-                      <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-1">
-                          {[...Array(item.rating)].map((_, i) => (
-                            <Star key={i} className="w-3.5 h-3.5 fill-gold-bright text-gold-bright" />
-                          ))}
-                        </div>
-                        <Quote className="w-6 h-6 text-gold-medium/40 group-hover:text-gold-medium/70 transition-colors" />
-                      </div>
-
-                      {/* Quote Text */}
-                      <blockquote className="font-serif text-xs sm:text-sm text-gray-200 font-light italic leading-relaxed mb-6">
-                        "{item.quote}"
-                      </blockquote>
-                    </div>
-
-                    {/* Author & Stat Badge */}
-                    <div className="pt-4 border-t border-gold-medium/15 flex items-center justify-between">
-                      <div>
-                        <h4 className="font-serif text-xs sm:text-sm font-semibold text-white tracking-wide">
-                          {item.author}
-                        </h4>
-                        <p className="text-[10px] text-gray-400 font-light mt-0.5">
-                          {item.title}, <span className="text-gold-medium/90">{item.company}</span>
-                        </p>
-                      </div>
-
-                      {/* Performance Metric Pill */}
-                      <div className="text-right pl-2">
-                        <div className="font-serif text-sm font-bold text-gold-bright">
-                          {item.stat}
-                        </div>
-                        <div className="text-[9px] text-gray-400 font-light tracking-tight">
-                          {item.statLabel}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </Card3D>
-              ))}
-            </div>
-          </div>
-
-          {/* Bottom Trust Guarantee Strip */}
-          <div className="p-4 sm:p-5 rounded-xl bg-navy-dark/90 border border-gold-medium/25 max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
-            <div className="flex flex-col items-center">
-              <span className="font-serif text-lg font-bold text-gold-bright">100%</span>
-              <span className="text-[10px] text-gray-300 font-light uppercase tracking-wider">Brand QA Compliance</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-serif text-lg font-bold text-gold-bright">25+</span>
-              <span className="text-[10px] text-gray-300 font-light uppercase tracking-wider">Years Leadership</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-serif text-lg font-bold text-gold-bright">115%</span>
-              <span className="text-[10px] text-gray-300 font-light uppercase tracking-wider">Avg RevPAR Index</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="font-serif text-lg font-bold text-gold-bright">Turnkey</span>
-              <span className="text-[10px] text-gray-300 font-light uppercase tracking-wider">Fiduciary Trust</span>
-            </div>
-          </div>
-
         </RevealSection>
       </section>
 

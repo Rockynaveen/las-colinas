@@ -52,7 +52,6 @@ export const Navigation: React.FC<NavigationProps> = () => {
       // Track active section based on scroll position (bottom to top)
       const sections = [
         { id: 'cta-section', name: 'contact' },
-        { id: 'clients-showcase', name: 'team' },
         { id: 'team-showcase', name: 'team' },
         { id: 'portfolio-showcase', name: 'portfolio' },
         { id: 'hotel-management', name: 'services' },

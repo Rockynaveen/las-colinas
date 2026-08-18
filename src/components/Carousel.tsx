@@ -159,30 +159,30 @@ export const Carousel: React.FC<CarouselHeroProps> = () => {
           </p>
         </motion.div>
 
-        {/* Call-to-Action Buttons with Spring Motion */}
+        {/* Call-to-Action Buttons with Responsive Mobile Stacking */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="flex flex-row items-center justify-center gap-3 sm:gap-5 w-auto max-w-full flex-nowrap"
+          className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto max-w-xs sm:max-w-none mx-auto"
         >
           <motion.button
             onClick={navigateToContact}
-            whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(212, 175, 55, 0.35)" }}
+            whileHover={{ scale: 1.04, boxShadow: "0px 10px 30px rgba(212, 175, 55, 0.35)" }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center justify-center gap-2 px-4 sm:px-8 py-3 sm:py-3.5 bg-gradient-to-r from-gold-medium via-gold-bright to-gold-medium text-navy-dark font-bold tracking-wider sm:tracking-widest text-[11px] sm:text-xs uppercase rounded shadow-xl transition-all duration-300 group cursor-pointer whitespace-nowrap flex-shrink-0"
+            className="flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 bg-gradient-to-r from-gold-medium via-gold-bright to-gold-medium text-navy-dark font-bold tracking-widest text-xs uppercase rounded-lg sm:rounded shadow-xl hover:shadow-gold-medium/30 transition-all duration-300 group cursor-pointer text-center"
           >
-            <Handshake className="w-3.5 sm:w-4 h-3.5 sm:h-4 transition-transform group-hover:scale-110" />
+            <Handshake className="w-4 h-4 transition-transform group-hover:scale-110 flex-shrink-0" />
             <span>Partner With Us</span>
           </motion.button>
 
           <motion.button
             onClick={navigateToContact}
-            whileHover={{ scale: 1.05, borderColor: "rgba(255, 215, 0, 0.8)" }}
+            whileHover={{ scale: 1.04, borderColor: "rgba(255, 215, 0, 0.8)" }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center justify-center gap-2 px-4 sm:px-8 py-3 sm:py-3.5 bg-navy-dark/80 hover:bg-navy-medium border border-gold-medium text-gold-medium hover:text-gold-bright font-bold tracking-wider sm:tracking-widest text-[11px] sm:text-xs uppercase rounded backdrop-blur-md shadow-lg transition-all duration-300 group cursor-pointer whitespace-nowrap flex-shrink-0"
+            className="flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 bg-navy-dark/80 hover:bg-navy-medium border border-gold-medium/80 hover:border-gold-bright text-gold-bright hover:text-white font-bold tracking-widest text-xs uppercase rounded-lg sm:rounded backdrop-blur-md shadow-lg transition-all duration-300 group cursor-pointer text-center"
           >
-            <Calendar className="w-3.5 sm:w-4 h-3.5 sm:h-4 transition-transform group-hover:scale-110" />
+            <Calendar className="w-4 h-4 transition-transform group-hover:scale-110 flex-shrink-0" />
             <span>Schedule a Consultation</span>
           </motion.button>
         </motion.div>

@@ -377,7 +377,7 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
                 <div className="relative rounded-xl overflow-hidden border border-gold-medium/30 shadow-2xl bg-navy-dark">
                   <div
                     className="h-80 sm:h-96 w-full bg-cover bg-center"
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1600&auto=format&fit=crop')" }}
+                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1578683010236-d716f9a3f461?q=80&w=1600&auto=format&fit=crop')" }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy-dark/40 to-transparent" />
                   

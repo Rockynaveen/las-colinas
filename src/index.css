@@ -41,6 +41,10 @@
   --font-sans: "Montserrat", system-ui, -apple-system, sans-serif;
 }
 
+body, html {
+  font-family: "Montserrat", system-ui, -apple-system, sans-serif;
+}
+
 :root {
   --background: #071120;
   --foreground: #fdfbf7;
@@ -80,11 +84,21 @@
 }
 
 /* Custom utility styles */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 /* Custom animations */

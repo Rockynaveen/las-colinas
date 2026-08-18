@@ -396,8 +396,8 @@ export const Services: React.FC<ServicesProps> = ({ setActivePage }) => {
                   </div>
                 </div>
 
-                <div className="p-5 rounded-xl bg-navy-dark/60 border border-gold-medium/15">
-                  <p className="text-xs text-gray-300 font-light italic leading-relaxed text-center">
+                <div className="p-4 sm:p-5 rounded-xl bg-[#071120] border border-gold-medium/30 shadow-md">
+                  <p className="text-xs sm:text-sm text-white font-medium leading-relaxed text-center font-sans">
                     "Delivering operational rigor, seamless guest satisfaction, and bottom-line owner returns across branded and independent assets."
                   </p>
                 </div>

@@ -121,28 +121,28 @@ export const Team: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         
         {/* Header */}
-        <div className="text-center mb-16 space-y-3">
+        <div className="text-center mb-16 space-y-3 font-sans">
           <Badge variant="gold">
             Leadership & Experts
           </Badge>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-wide">
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
             Our Professional Team
           </h2>
           <div className="w-16 h-[1px] bg-gold-medium mx-auto" />
-          <p className="max-w-2xl mx-auto text-gray-400 text-sm sm:text-base font-light leading-relaxed">
+          <p className="max-w-2xl mx-auto text-gray-200 text-sm sm:text-base font-normal leading-relaxed font-sans">
             Meet the experienced leadership team driving operations, asset optimization, financial management, and portfolio expansion for Las Colinas Hospitality.
           </p>
         </div>
 
         {/* Team Grid with Shadcn Card */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left max-w-6xl mx-auto">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 text-left max-w-6xl mx-auto font-sans">
           {TEAM.map((member, idx) => {
             const isExpanded = expandedId === idx;
             return (
               <Card 
                 key={idx}
-                className={`transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl ${
-                  isExpanded ? 'border-gold-medium ring-1 ring-gold-medium/30 shadow-2xl' : 'hover:border-gold-medium/40'
+                className={`transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl font-sans bg-[#0b1426] ${
+                  isExpanded ? 'border-gold-bright ring-1 ring-gold-bright/30 shadow-2xl' : 'border-gold-medium/30 hover:border-gold-bright'
                 }`}
               >
                 <div className="p-6">
@@ -153,15 +153,15 @@ export const Team: React.FC = () => {
                         <img src={member.image} alt={member.name} className="w-full h-full object-cover object-top" />
                       </div>
                     ) : (
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gold-medium/20 to-gold-dark/10 border border-gold-medium/30 flex items-center justify-center text-gold-bright font-serif text-lg font-bold select-none flex-shrink-0">
+                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-gold-medium/20 to-gold-dark/10 border border-gold-medium/30 flex items-center justify-center text-gold-bright font-sans text-lg font-bold select-none flex-shrink-0">
                         {member.initials}
                       </div>
                     )}
                     <div>
-                      <h3 className="font-serif text-lg font-medium text-white tracking-wide leading-snug">
+                      <h3 className="font-sans text-lg font-bold text-white tracking-tight leading-snug">
                         {member.name}
                       </h3>
-                      <span className="text-[10px] sm:text-xs font-bold tracking-widest text-gold-bright uppercase block mt-0.5">
+                      <span className="text-xs font-bold tracking-wider text-gold-bright uppercase block mt-0.5 font-sans">
                         {member.title}
                       </span>
                     </div>
@@ -170,26 +170,26 @@ export const Team: React.FC = () => {
                   {/* Specialty / Info bullets */}
                   <div className="space-y-2 mb-4">
                     {member.specialty && (
-                      <div className="flex items-center gap-2 text-[10px] text-gray-400 tracking-wider uppercase font-semibold">
+                      <div className="flex items-center gap-2 text-xs text-gold-medium/90 tracking-wider uppercase font-semibold font-sans">
                         <Award className="w-3.5 h-3.5 text-gold-bright flex-shrink-0" />
                         <span>{member.specialty}</span>
                       </div>
                     )}
                     {member.education && (
-                      <div className="flex items-start gap-2 text-xs text-gray-400 font-light leading-relaxed">
+                      <div className="flex items-start gap-2 text-xs text-gray-300 font-normal leading-relaxed font-sans">
                         <GraduationCap className="w-4 h-4 text-gold-medium/70 mt-0.5 flex-shrink-0" />
                         <span>{member.education}</span>
                       </div>
                     )}
                   </div>
 
-                  <p className="text-gray-300 text-xs sm:text-sm font-light leading-relaxed mb-4">
+                  <p className="text-gray-200 text-xs sm:text-sm font-normal leading-relaxed mb-4 font-sans">
                     {member.brief}
                   </p>
 
                   {/* Expandable bio block */}
                   <div 
-                    className={`transition-all duration-300 overflow-hidden text-xs text-gray-300 font-light leading-relaxed space-y-2 ${
+                    className={`transition-all duration-300 overflow-hidden text-xs text-gray-200 font-normal leading-relaxed space-y-2 font-sans ${
                       isExpanded ? 'max-h-[300px] opacity-100 mt-4 border-t border-gold-medium/15 pt-4' : 'max-h-0 opacity-0 pointer-events-none'
                     }`}
                   >

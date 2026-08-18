@@ -132,28 +132,28 @@ export const Portfolio: React.FC = () => {
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
-        <div className="text-center mb-16 space-y-3">
+        <div className="text-center mb-16 space-y-3 font-sans">
           <Badge variant="gold">
             Our Portfolio
           </Badge>
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-wide">
+          <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
             Building Exceptional Hospitality Assets
           </h2>
           <div className="w-16 h-[1px] bg-gold-medium mx-auto" />
-          <p className="max-w-2xl mx-auto text-gray-400 text-sm sm:text-base font-light leading-relaxed">
+          <p className="max-w-2xl mx-auto text-gray-200 text-sm sm:text-base font-normal leading-relaxed font-sans">
             Our portfolio includes branded and independent hotels across multiple markets. Every property reflects our commitment to operational excellence, financial performance, and outstanding guest experiences.
           </p>
         </div>
 
         {/* Filter Controls with Shadcn Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12 border-b border-gold-medium/15 pb-4 max-w-4xl mx-auto">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-12 border-b border-gold-medium/15 pb-4 max-w-4xl mx-auto font-sans">
           {filterTabs.map((tab) => (
             <Button
               key={tab.id}
               variant={filter === tab.id ? 'gold' : 'ghost'}
               size="sm"
               onClick={() => setFilter(tab.id)}
-              className="text-xs"
+              className="text-xs font-sans font-semibold"
             >
               {tab.label}
             </Button>
@@ -161,11 +161,11 @@ export const Portfolio: React.FC = () => {
         </div>
 
         {/* Property Grid with Shadcn Card */}
-        <div className="grid md:grid-cols-2 gap-8 text-left max-w-5xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8 text-left max-w-5xl mx-auto font-sans">
           {filteredProperties.map((prop, idx) => (
             <Card
               key={idx}
-              className="overflow-hidden group shadow-xl transition-all duration-500 animate-fade-in flex flex-col justify-between"
+              className="overflow-hidden group shadow-xl transition-all duration-500 animate-fade-in flex flex-col justify-between font-sans bg-[#0b1426] border-gold-medium/30"
             >
               <div>
                 {/* Photo container */}
@@ -181,20 +181,20 @@ export const Portfolio: React.FC = () => {
                     </Badge>
                   </div>
                   <div className="absolute bottom-4 left-4">
-                    <span className="text-xs text-gold-medium/80 tracking-wider block font-medium uppercase">{prop.location}</span>
-                    <h3 className="font-serif text-xl font-light text-white tracking-wide">{prop.name}</h3>
+                    <span className="text-xs text-gold-medium tracking-wider block font-semibold uppercase font-sans">{prop.location}</span>
+                    <h3 className="font-sans text-xl font-bold text-white tracking-tight">{prop.name}</h3>
                   </div>
                 </div>
 
                 {/* Info Block */}
                 <div className="p-6 space-y-4">
-                  <span className="text-[10px] font-bold tracking-widest text-gold-medium uppercase block border-b border-gold-medium/10 pb-1.5">
+                  <span className="text-xs font-bold tracking-widest text-gold-bright uppercase block border-b border-gold-medium/15 pb-1.5 font-sans">
                     Strategic Accomplishments:
                   </span>
                   <ul className="space-y-2">
                     {prop.highlights.map((high, i) => (
-                      <li key={i} className="flex items-start gap-2.5 text-xs text-gray-300 font-light leading-relaxed">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-gold-bright mt-0.5 flex-shrink-0" />
+                      <li key={i} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-200 font-normal leading-relaxed font-sans">
+                        <CheckCircle2 className="w-4 h-4 text-gold-bright mt-0.5 flex-shrink-0" />
                         <span>{high}</span>
                       </li>
                     ))}

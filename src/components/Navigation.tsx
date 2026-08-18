@@ -52,12 +52,11 @@ export const Navigation: React.FC<NavigationProps> = () => {
       // Track active section based on scroll position (bottom to top)
       const sections = [
         { id: 'cta-section', name: 'contact' },
-        { id: 'team-showcase', name: 'team' },
-        { id: 'portfolio-showcase', name: 'portfolio' },
         { id: 'hotel-management', name: 'services' },
-        { id: 'services-showcase', name: 'services' },
+        { id: 'team-showcase', name: 'careers' },
+        { id: 'portfolio-showcase', name: 'portfolio' },
         { id: 'why-choose-us', name: 'about' },
-        { id: 'vision-mission', name: 'about' },
+        { id: 'services-showcase', name: 'services' },
         { id: 'about-teaser', name: 'about' },
       ];
 
@@ -94,15 +93,15 @@ export const Navigation: React.FC<NavigationProps> = () => {
     const sectionMap: Record<string, string> = {
       'about': 'about-teaser',
       'about-overview': 'about-teaser',
-      'about-story': 'our-story',
-      'about-vision': 'vision-mission',
-      'about-values': 'core-values',
-      'about-advantage': 'competitive-edge',
-      'about-goals': 'future-goals',
+      'about-story': 'about-teaser',
+      'about-vision': 'about-teaser',
+      'about-values': 'why-choose-us',
+      'about-advantage': 'why-choose-us',
+      'about-goals': 'why-choose-us',
       'services': 'services-showcase',
       'portfolio': 'portfolio-showcase',
       'team': 'team-showcase',
-      'careers': 'careers-section',
+      'careers': 'team-showcase',
       'contact': 'cta-section',
     };
 
@@ -213,26 +212,27 @@ export const Navigation: React.FC<NavigationProps> = () => {
               Portfolio
             </button>
 
-            {/* Team */}
+            {/* Careers */}
             <button
-              onClick={() => handleNavClick('team')}
+              onClick={() => handleNavClick('careers')}
               className={`px-4 py-2 text-xs font-semibold tracking-widest uppercase transition-all duration-300 cursor-pointer ${
-                activeSection === 'team'
+                activeSection === 'careers'
                   ? 'text-gold-medium border-b border-gold-medium'
                   : 'text-gray-300 hover:text-white hover:border-b hover:border-gray-500'
               }`}
             >
-              Our Team
+              Careers
             </button>
 
-            {/* Contact Shadcn Button */}
+            {/* Partner With Us Button */}
             <div className="ml-4">
               <Button
                 variant="gold"
                 size="sm"
                 onClick={() => handleNavClick('contact')}
+                className="font-bold tracking-wider"
               >
-                Contact
+                Partner With Us
               </Button>
             </div>
           </div>
@@ -312,12 +312,12 @@ export const Navigation: React.FC<NavigationProps> = () => {
                     </button>
 
                     <button
-                      onClick={() => handleNavClick('team')}
+                      onClick={() => handleNavClick('careers')}
                       className={`block w-full text-left py-2.5 text-sm font-semibold tracking-widest uppercase border-b border-gold-medium/15 ${
-                        activeSection === 'team' ? 'text-gold-bright' : 'text-gray-300'
+                        activeSection === 'careers' ? 'text-gold-bright' : 'text-gray-300'
                       }`}
                     >
-                      Our Team
+                      Careers
                     </button>
                   </div>
                 </div>
@@ -325,10 +325,10 @@ export const Navigation: React.FC<NavigationProps> = () => {
                 <div className="pt-6 border-t border-gold-medium/15">
                   <Button
                     variant="gold"
-                    className="w-full"
+                    className="w-full font-bold tracking-wider"
                     onClick={() => handleNavClick('contact')}
                   >
-                    Contact Us
+                    Partner With Us
                   </Button>
                 </div>
               </SheetContent>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Navigation } from './components/Navigation';
 import { Home } from './pages/Home';
 import { Phone, Mail, MapPin, ArrowUp } from 'lucide-react';
@@ -15,7 +16,7 @@ const App: React.FC = () => {
         setShowScrollTop(false);
       }
     };
-    window.addEventListener('scroll', handleScrollVisibility);
+    window.addEventListener('scroll', handleScrollVisibility, { passive: true });
     return () => window.removeEventListener('scroll', handleScrollVisibility);
   }, []);
 
@@ -60,14 +61,21 @@ const App: React.FC = () => {
         {/* Subtle Ambient Background Lighting */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[850px] h-[300px] bg-[radial-gradient(circle,rgba(212,175,55,0.05)_0%,transparent_70%)] pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto space-y-12 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-7xl mx-auto space-y-12 relative z-10"
+        >
           
           {/* Main 3-Column Open Layout (No Boxes) */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-16">
             
             {/* Column 1: Brand (5 Cols) */}
             <div className="md:col-span-5 space-y-4">
-              <div 
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
                 onClick={() => handleFooterNav('home')} 
                 className="cursor-pointer inline-block"
               >
@@ -76,7 +84,7 @@ const App: React.FC = () => {
                   alt="Las Colinas Hospitality Management"
                   className="h-16 sm:h-20 w-auto object-contain select-none"
                 />
-              </div>
+              </motion.div>
 
               <p className="text-gray-400 text-xs sm:text-sm font-light leading-relaxed max-w-md">
                 We provide personalized service over corporate bureaucracy with disciplined financial and operational acumen. Dedicated to owner ROI and asset appreciation across branded and boutique properties.
@@ -105,7 +113,7 @@ const App: React.FC = () => {
                     className="hover:text-gold-bright transition-colors cursor-pointer flex items-center gap-2 group text-left"
                   >
                     <span className="text-gold-medium/60 group-hover:text-gold-bright font-bold">·</span>
-                    <span className="group-hover:translate-x-1 transition-transform">About</span>
+                    <span className="group-hover:translate-x-1 transition-transform">About Us</span>
                   </button>
                 </li>
                 <li>
@@ -114,7 +122,7 @@ const App: React.FC = () => {
                     className="hover:text-gold-bright transition-colors cursor-pointer flex items-center gap-2 group text-left"
                   >
                     <span className="text-gold-medium/60 group-hover:text-gold-bright font-bold">·</span>
-                    <span className="group-hover:translate-x-1 transition-transform">Services</span>
+                    <span className="group-hover:translate-x-1 transition-transform">Our Services</span>
                   </button>
                 </li>
                 <li>
@@ -132,7 +140,7 @@ const App: React.FC = () => {
                     className="hover:text-gold-bright transition-colors cursor-pointer flex items-center gap-2 group text-left"
                   >
                     <span className="text-gold-medium/60 group-hover:text-gold-bright font-bold">·</span>
-                    <span className="group-hover:translate-x-1 transition-transform">Leadership</span>
+                    <span className="group-hover:translate-x-1 transition-transform">Leadership & Team</span>
                   </button>
                 </li>
                 <li>
@@ -150,23 +158,26 @@ const App: React.FC = () => {
                     className="hover:text-gold-bright transition-colors cursor-pointer flex items-center gap-2 group text-left"
                   >
                     <span className="text-gold-medium/60 group-hover:text-gold-bright font-bold">·</span>
-                    <span className="group-hover:translate-x-1 transition-transform">Contact</span>
+                    <span className="group-hover:translate-x-1 transition-transform">Contact Ownership</span>
                   </button>
                 </li>
               </ul>
             </div>
 
-            {/* Column 3: Contact (4 Cols) */}
+            {/* Column 3: Headquarters & Contact (4 Cols) */}
             <div className="md:col-span-4 space-y-5">
               <h4 className="text-xs font-bold tracking-[0.25em] text-gold-bright uppercase pb-2 border-b border-gold-medium/20">
-                Contact
+                Corporate Office
               </h4>
 
-              <div className="space-y-4 text-xs sm:text-sm text-gray-300 font-light">
+              <div className="space-y-3.5 text-xs sm:text-sm text-gray-300 font-light">
                 {/* Address */}
                 <div className="flex gap-3 items-start">
                   <MapPin className="w-4 h-4 text-gold-bright flex-shrink-0 mt-0.5" />
-                  <span className="leading-relaxed">450 E. John Carpenter Freeway, Irving, Texas 75062</span>
+                  <span>
+                    545 E John Carpenter Fwy, Suite 300<br />
+                    Irving, TX 75062
+                  </span>
                 </div>
 
                 {/* Phones */}
@@ -207,19 +218,26 @@ const App: React.FC = () => {
             </div>
           </div>
 
-        </div>
+        </motion.div>
       </footer>
 
-      {/* Floating Scroll-to-Top Button */}
-      <button
-        onClick={scrollToTop}
-        className={`fixed bottom-6 right-6 p-3 rounded-full bg-gold-medium hover:bg-gold-bright text-navy-dark shadow-lg transition-all duration-500 z-50 focus:outline-none hover:-translate-y-1 ${
-          showScrollTop ? 'opacity-100 translate-y-0 visible' : 'opacity-0 translate-y-4 invisible pointer-events-none'
-        }`}
-        aria-label="Scroll to Top"
-      >
-        <ArrowUp className="w-4 h-4 font-bold" />
-      </button>
+      {/* Floating Scroll-to-Top Button with AnimatePresence */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 15 }}
+            whileHover={{ scale: 1.1, y: -3, boxShadow: '0px 8px 25px rgba(212, 175, 55, 0.4)' }}
+            whileTap={{ scale: 0.95 }}
+            onClick={scrollToTop}
+            className="fixed bottom-6 right-6 p-3.5 rounded-full bg-gold-medium text-navy-dark shadow-xl z-50 focus:outline-none cursor-pointer flex items-center justify-center border border-gold-bright"
+            aria-label="Scroll to Top"
+          >
+            <ArrowUp className="w-4 h-4 stroke-[2.5]" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
